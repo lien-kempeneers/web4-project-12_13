@@ -10,3 +10,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+  task     Task[]
+}
+
+model Profile {
+  id        Int    @id @default(autoincrement())
+  name      String
+  biography String
+}
+
+model Task {
+  id          Int         @id @default(autoincrement())
+  title       String
+  description String
+  deadline    DateTime
+  milestone   Milestone[]
+  userId      Int
+  user        User        @relation(fields: [userId], references: [id])
+}
+
+model Milestone {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  deadline    DateTime
+  taskId      Int
+  task        Task     @relation(fields: [taskId], references: [id])
+}
