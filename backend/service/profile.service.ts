@@ -1,5 +1,6 @@
 import { Profile } from "../domain/model/profile";
 import * as profileDB from "../domain/data-access/profile.db";
+import { profile } from "console";
 
 const addProfile = async ({name, biography}:Profile): Promise<Profile> => {
     if(name.length == 0){
@@ -11,5 +12,18 @@ const addProfile = async ({name, biography}:Profile): Promise<Profile> => {
     return await profileDB.createProfile({
         name:name,
         biography:biography
+    })
+};
+
+const deleteProfile = async ({id}:Profile): Promise<Profile> => {
+    if(!id || Number.isNaN(Number(id))){
+        throw new Error('Id is invalid');
+    }
+    const profile = await profileDB.getProfile({id:id});
+    if(!profile){
+        throw new Error('Profile doesn\'t exist');
+    }
+    return await profileDB.deleteProfile({
+        id:id,
     })
 };

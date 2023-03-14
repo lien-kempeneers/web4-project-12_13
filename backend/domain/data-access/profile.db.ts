@@ -16,6 +16,16 @@ export const getAllProfiles = async (): Promise<Profile[]> => {
     }
 }
 
+export const getProfile = async ({id}): Promise<Profile> => {
+    try {
+        const profilePrisma = await prisma.profile.findUnique({where:{id:id}})
+        return mapToProfile(profilePrisma);
+    } catch (error) {
+        console.error(error);
+        throw new Error("Database error. See server log for details.")
+    }
+}
+
 export const createProfile = async ({name, biography}): Promise<Profile> => {
     try {
         const profilePrisma = await prisma.profile.create({
