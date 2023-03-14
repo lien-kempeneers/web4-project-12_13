@@ -16,10 +16,8 @@ const addProfile = async ({name, biography}:Profile): Promise<Profile> => {
 };
 
 const deleteProfile = async ({id}:Profile): Promise<Profile> => {
-    if(!id || Number.isNaN(Number(id))){
-        throw new Error('Id is invalid');
-    }
-    const profile = await profileDB.getProfile({id:id});
+    
+    const profile = await getProfile({id:id});
     if(!profile){
         throw new Error('Profile doesn\'t exist');
     }
@@ -29,8 +27,10 @@ const deleteProfile = async ({id}:Profile): Promise<Profile> => {
 };
 
 const updateProfile = async ({id, name, biography}:Profile): Promise<Profile> => {
-    if(!id || Number.isNaN(Number(id))){
-        throw new Error('Id is invalid');
+    
+    const profile = await getProfile({id:id});
+    if(!profile){
+        throw new Error('Profile doesn\'t exist');
     }
     if(name.length == 0){
         throw new Error('Name can\'t be empty');
@@ -46,9 +46,11 @@ const updateProfile = async ({id, name, biography}:Profile): Promise<Profile> =>
 };
 
 const upsertProfile = async ({id, name, biography}:Profile): Promise<Profile> => {
-    if(!id || Number.isNaN(Number(id))){
-        throw new Error('Id is invalid');
+    const profile = await getProfile({id:id});
+    if(!profile){
+        throw new Error('Profile doesn\'t exist');
     }
+
     if(name.length == 0){
         throw new Error('Name can\'t be empty');
     }
@@ -61,3 +63,11 @@ const upsertProfile = async ({id, name, biography}:Profile): Promise<Profile> =>
         biography:biography
     })
 };
+
+const getProfile = async ({id}): Promise<Profile> => {
+    if(!id || Number.isNaN(Number(id))){
+        throw new Error('Id is invalid');
+    }
+    return await profileDB.getProfile({id:id});
+
+}
