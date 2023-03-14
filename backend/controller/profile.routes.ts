@@ -41,4 +41,24 @@ profileRouter.post('/profile', async  (req: Request, res: Response) => {
     }
 });
 
+profileRouter.put('/profile', async  (req: Request, res: Response) => {
+    const ProfileInput = req.body;
+    try{
+        const profile = await profileService.upsertProfile(ProfileInput);
+        res.status(200).json(profile);
+    } catch (err) {
+        res.status(500).json({status: 'error', message: err.message});
+    }
+});
+
+profileRouter.delete('/profile', async  (req: Request, res: Response) => {
+    const ProfileInput = req.body;
+    try{
+        const profile = await profileService.deleteProfile(ProfileInput);
+        res.status(200).json(profile);
+    } catch (err) {
+        res.status(500).json({status: 'error', message: err.message});
+    }
+});
+
 export { profileRouter };
