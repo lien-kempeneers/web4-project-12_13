@@ -1,79 +1,62 @@
 /**
- * @swagger
- * /profile:
- *   post:
- *      summary: Add a profile
- *      requestBody:
- *        required: true
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/ProfileInput'
- *      responses:
- *         200:
- *            description: The profile was successfully created
- *            content:
- *              application/json:
- *                schema:
- *                  $ref: '#/components/schemas/Profile'
- *  get:
- *       summary: Get a list of profiles
- *       requestBody:
- *         required: false
- *       responses:
- *          
- *  put:
- *       summary: Update a profile
- *       requestBody:
- *         required: true
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ProfileInput'
- *       responses:
- *          200:
- *             description: The profile was successfully updated
- *             content:
- *               application/json:
- *                 schema:
- *                   $ref: '#/components/schemas/Profile'
- *  delete:
- *       summary: Delete a profile
- *       requestBody:
- *         required: true
- *       responses:
- *          200:
- *             description: The profile was successfully deleted
- *             content:
- *               application/json:
- *                 schema:
- *                   $ref: '#/components/schemas/Profile'
- * 
- */
+* @swagger
+* paths:
+*  /profile/:
+*    get:
+*      description: List all profiles that are in the database
+*      summary: List all profiles
+*      responses:
+*        '200':
+*          description: Succesfully received a list of all the profiles
+*      servers:
+*        - url: http://localhost:3000
+*    put:
+*      description: Update a profile that's in the database
+*      summary: Update a profile
+*      responses:
+*        '200':
+*          description: Succesfully updated a profile
+*      servers:
+*        - url: http://localhost:3000
+*    post:
+*      description: Add a profile to the database 
+*      summary: Add a profile
+*      responses:
+*        '200':
+*          description: Succesfully added a profile
+*      servers:
+*        - url: http://localhost:3000
+*    delete:
+*      summary: Delete a profile
+*      description: Delete a specific profile from the database
+*      responses:
+*        '200':
+*          description: Succesfully deleted a profile
+*/
 const profileRouter = require('express').Router();
 const profileService = require('../service/profile.service');
 import express, {Request, Response} from 'express';
 
-profileRouter.get('/profile', async (req: Request, res: Response) => {
+profileRouter.get('/', async (req: Request, res: Response) => {
     try{
-        const profile = await profileService.getAll();
+        const profile = await profileService.getAllProfiles();
         res.status(200).json(profile);
     } catch (err) {
         res.status(500).json({status: 'error', message: err.message});
     }
 });
 
-profileRouter.post('/profile', async  (req: Request, res: Response) => {
+profileRouter.post('/', async  (req: Request, res: Response) => {
     const ProfileInput = req.body;
     try{
-        const profile = await profileService.create(ProfileInput);
+        const profile = await profileService.addProfile(ProfileInput);
         res.status(200).json(profile);
     } catch (err) {
         res.status(500).json({status: 'error', message: err.message});
     }
 });
 
-profileRouter.put('/profile', async  (req: Request, res: Response) => {
+profileRouter.put('/', async  (req: Request, res: Response) => {
     const ProfileInput = req.body;
     try{
         const profile = await profileService.upsertProfile(ProfileInput);
@@ -83,7 +66,7 @@ profileRouter.put('/profile', async  (req: Request, res: Response) => {
     }
 });
 
-profileRouter.delete('/profile', async  (req: Request, res: Response) => {
+profileRouter.delete('/', async  (req: Request, res: Response) => {
     const ProfileInput = req.body;
     try{
         const profile = await profileService.deleteProfile(ProfileInput);
