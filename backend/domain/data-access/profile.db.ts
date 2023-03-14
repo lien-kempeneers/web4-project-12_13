@@ -54,7 +54,7 @@ export const deleteProfile = async ({id}): Promise<Profile> => {
     }
 }
 
-export const upsertProfile = async ({id, name, biography}): Promise<Profile[]> => {
+export const upsertProfile = async ({id, name, biography}): Promise<Profile> => {
     try {
         const profilePrisma = await prisma.profile.upsert({
             where: {
@@ -69,14 +69,14 @@ export const upsertProfile = async ({id, name, biography}): Promise<Profile[]> =
                 biography: biography,
             }
         })
-        return mapToProfiles(profilePrisma);
+        return mapToProfile(profilePrisma);
     } catch (error) {
         console.error(error);
         throw new Error("Database error. See server log for details.")
     }
 }
 
-export const updateProfile = async ({id, name, biography}): Promise<Profile[]> => {
+export const updateProfile = async ({id, name, biography}): Promise<Profile> => {
     try {
         const profilePrisma = await prisma.profile.update({
             where: {
@@ -87,7 +87,7 @@ export const updateProfile = async ({id, name, biography}): Promise<Profile[]> =
                 biography: biography,
             },
         })
-        return mapToProfiles(profilePrisma);
+        return mapToProfile(profilePrisma);
     } catch (error) {
         console.error(error);
         throw new Error("Database error. See server log for details.")
