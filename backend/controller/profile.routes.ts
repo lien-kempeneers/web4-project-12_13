@@ -16,6 +16,38 @@
  *              application/json:
  *                schema:
  *                  $ref: '#/components/schemas/Profile'
+ *  get:
+ *       summary: Get a list of profiles
+ *       requestBody:
+ *         required: false
+ *       responses:
+ *          
+ *  put:
+ *       summary: Update a profile
+ *       requestBody:
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ProfileInput'
+ *       responses:
+ *          200:
+ *             description: The profile was successfully updated
+ *             content:
+ *               application/json:
+ *                 schema:
+ *                   $ref: '#/components/schemas/Profile'
+ *  delete:
+ *       summary: Delete a profile
+ *       requestBody:
+ *         required: true
+ *       responses:
+ *          200:
+ *             description: The profile was successfully deleted
+ *             content:
+ *               application/json:
+ *                 schema:
+ *                   $ref: '#/components/schemas/Profile'
  * 
  */
 const profileRouter = require('express').Router();
