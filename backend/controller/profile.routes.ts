@@ -22,6 +22,15 @@ const profileRouter = require('express').Router();
 const profileService = require('../service/profile.service');
 import express, {Request, Response} from 'express';
 
+profileRouter.get('/profile', async (req: Request, res: Response) => {
+    try{
+        const profile = await profileService.getAll();
+        res.status(200).json(profile);
+    } catch (err) {
+        res.status(500).json({status: 'error', message: err.message});
+    }
+});
+
 profileRouter.post('/profile', async  (req: Request, res: Response) => {
     const ProfileInput = req.body;
     try{
