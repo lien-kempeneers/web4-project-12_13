@@ -5,7 +5,8 @@ import {mapToProfiles, mapToProfile} from "../data-access/profile.mapper";
 
 const prisma = new PrismaClient();
 
-const getAllProfiles = async (): Promise<Profile[]> => {
+
+export const getAllProfiles = async (): Promise<Profile[]> => {
     try {
         const profilePrisma = await prisma.profile.findMany({})
         return mapToProfiles(profilePrisma);
@@ -15,7 +16,7 @@ const getAllProfiles = async (): Promise<Profile[]> => {
     }
 }
 
-const createProfile = async ({name, biography}): Promise<Profile> => {
+export const createProfile = async ({name, biography}): Promise<Profile> => {
     try {
         const profilePrisma = await prisma.profile.create({
         data:{
@@ -29,7 +30,7 @@ const createProfile = async ({name, biography}): Promise<Profile> => {
     }
 }
 
-const deleteProfile = async ({id}): Promise<Profile> => {
+export const deleteProfile = async ({id}): Promise<Profile> => {
     try {
         const profilePrisma = await prisma.profile.delete({
             where: {
@@ -43,7 +44,7 @@ const deleteProfile = async ({id}): Promise<Profile> => {
     }
 }
 
-const upsertProfile = async ({id, name, biography}): Promise<Profile[]> => {
+export const upsertProfile = async ({id, name, biography}): Promise<Profile[]> => {
     try {
         const profilePrisma = await prisma.profile.upsert({
             where: {
@@ -65,7 +66,7 @@ const upsertProfile = async ({id, name, biography}): Promise<Profile[]> => {
     }
 }
 
-const updateProfile = async ({id, name, biography}): Promise<Profile[]> => {
+export const updateProfile = async ({id, name, biography}): Promise<Profile[]> => {
     try {
         const profilePrisma = await prisma.profile.update({
             where: {
