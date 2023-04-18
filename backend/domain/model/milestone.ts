@@ -12,4 +12,8 @@ export class Milestone {
         this.deadline = milestone.deadline;
         this.taskId = milestone.taskId;
     }
+
+    static create( {id, title, description, deadline, taskId}): Milestone {
+        return new Milestone({id, title, description, deadline, taskId});
+    }
 }

@@ -1,23 +1,23 @@
-import { Profile } from "../model/profile";
-import { Profile as ProfilePrisma} from "@prisma/client";
+import { User } from "../model/user";
+import { User as UserPrisma} from "@prisma/client";
 
-export const mapToProfiles = (prismaProfiles): Profile[] => {
-    let profiles = [];
-    for(let prismaProfile of prismaProfiles){
-        profiles.push(mapToProfile(prismaProfile))
+export const mapToUsers = (prismaUsers): User[] => {
+    let users = [];
+    for(let prismaUser of prismaUsers){
+        users.push(mapToUsers(prismaUser))
     }
-    return profiles;
+    return users;
 }
 
-export const mapToProfile = ({
+export const mapToUser = ({
     id,
-    name,
-    biography,
-}: ProfilePrisma)
-: Profile =>
-new Profile({
+    email,
+    password,
+}: UserPrisma)
+: User =>
+new User({
     id,
-    name,
-    biography
+    email,
+    password
 }
 )

@@ -1,23 +1,27 @@
-import { Profile } from "../model/profile";
-import { Profile as ProfilePrisma} from "@prisma/client";
+import { Milestone } from "../model/milestone";
+import { Milestone as milestonePrisma} from "@prisma/client";
 
-export const mapToProfiles = (prismaProfiles): Profile[] => {
-    let profiles = [];
-    for(let prismaProfile of prismaProfiles){
-        profiles.push(mapToProfile(prismaProfile))
+export const mapToMilestones = (milestonePrisma): Milestone[] => {
+    let milestones = [];
+    for(let prismaMilestone of milestonePrisma){
+        milestones.push(mapToMilestone(prismaMilestone))
     }
-    return profiles;
+    return milestones;
 }
 
-export const mapToProfile = ({
+export const mapToMilestone = ({
     id,
-    name,
-    biography,
-}: ProfilePrisma)
-: Profile =>
-new Profile({
+    title,
+    description,
+    deadline,
+    taskId,
+}: milestonePrisma)
+: Milestone =>
+new Milestone({
     id,
-    name,
-    biography
+    title,
+    description,
+    deadline,
+    taskId
 }
 )

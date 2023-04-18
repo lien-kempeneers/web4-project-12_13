@@ -5,7 +5,13 @@ const getAllUsers = () => UserDB.getAllUsers();
 
 const getUserByEmail = (email: string) => UserDB.getUserByEmail(email);
 
+const addUser = (user: User) => UserDB.addUser(user);
+
+const updateUser = (user: User) => UserDB.updateUser(user);
+
 export default {
     getAllUsers,
-    getUserByEmail
+    getUserByEmail,
+    addUser,
+    updateUser
 };

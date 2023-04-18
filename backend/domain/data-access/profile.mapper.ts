@@ -1,5 +1,5 @@
-import { Profile } from "../model/profile";
-import { Profile as ProfilePrisma} from "@prisma/client";
+import { Profile } from '../model/profile';
+import { Profile as ProfilePrisma} from '@prisma/client';
 
 export const mapToProfiles = (prismaProfiles): Profile[] => {
     let profiles = [];

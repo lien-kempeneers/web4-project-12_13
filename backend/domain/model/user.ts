@@ -3,7 +3,7 @@ export class User {
     readonly email: string;
     readonly password: string;
 
-    constructor( user: { id: number, email: string, password: string } ) {
+    constructor( user: { id?: number, email: string, password: string } ) {
         this.id = user.id;
         this.email = user.email;
         this.password = user.password;

@@ -46,6 +46,15 @@ profileRouter.get('/', async (req: Request, res: Response) => {
     }
 });
 
+profileRouter.get('/:id', async (req: Request, res: Response) => {
+    try{
+        const profile = await profileService.getProfileById(req.params.id);
+        res.status(200).json(profile);
+    } catch (err) {
+        res.status(500).json({status: 'error', message: err.message});
+    }
+});
+
 profileRouter.post('/', async  (req: Request, res: Response) => {
     const ProfileInput = req.body;
     try{
@@ -66,10 +75,9 @@ profileRouter.put('/', async  (req: Request, res: Response) => {
     }
 });
 
-profileRouter.delete('/', async  (req: Request, res: Response) => {
-    const ProfileInput = req.body;
+profileRouter.delete('/:id', async  (req: Request, res: Response) => {
     try{
-        const profile = await profileService.deleteProfile(ProfileInput);
+        const profile = await profileService.deleteProfile(req.params.id);
         res.status(200).json(profile);
     } catch (err) {
         res.status(500).json({status: 'error', message: err.message});

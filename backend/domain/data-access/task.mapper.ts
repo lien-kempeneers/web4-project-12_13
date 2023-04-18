@@ -1,23 +1,27 @@
-import { Profile } from "../model/profile";
-import { Profile as ProfilePrisma} from "@prisma/client";
+import { Task } from "../model/task";
+import { Task as TaskPrisma} from "@prisma/client";
 
-export const mapToProfiles = (prismaProfiles): Profile[] => {
-    let profiles = [];
-    for(let prismaProfile of prismaProfiles){
-        profiles.push(mapToProfile(prismaProfile))
+export const mapToTasks = (prismaTasks): Task[] => {
+    let tasks = [];
+    for(let prismaTask of prismaTasks){
+        tasks.push(mapToTasks(prismaTask))
     }
-    return profiles;
+    return tasks;
 }
 
-export const mapToProfile = ({
+export const mapToTask = ({
     id,
-    name,
-    biography,
-}: ProfilePrisma)
-: Profile =>
-new Profile({
+    title,
+    description, 
+    deadline,
+    userId,
+}: TaskPrisma)
+: Task =>
+new Task({
     id,
-    name,
-    biography
+    title,
+    description,
+    deadline,
+    userId
 }
 )
