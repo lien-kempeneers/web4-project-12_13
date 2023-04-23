@@ -3,7 +3,6 @@ import UserService from "../../service/UserService"
 import Header from "../../components/Header"
 import UserOverviewTable from "../../components/users/UserOverviewTable"
 import { User } from "../../types"
-import { get } from "http"
 
 
 const Users : React.FC = () => {

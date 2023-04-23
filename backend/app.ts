@@ -5,9 +5,9 @@ import * as bodyParser from "body-parser";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { profileRouter } from './controller/profile.routes';
-//import { userRouter } from './controller/user.routes';
-//import { taskRouter } from './controller/task.routes';
-//import { milestoneRouter } from './controller/milestone.routes';
+import { userRouter } from './controller/user.routes';
+import { taskRouter } from './controller/task.routes';
+import { milestoneRouter } from './controller/milestone.routes';
 
 const app = express();
 dotenv.config();
@@ -28,9 +28,9 @@ const swaggerSpec = swaggerJSDoc(swaggerOpts);
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/profile', profileRouter)
-//app.use('/user', userRouter)
-//app.use('/task', taskRouter)
-//app.use('/milestone', milesoneRouter)
+app.use('/user', userRouter)
+app.use('/task', taskRouter)
+app.use('/milestone', milestoneRouter)
 
 app.get("/status", (req, res) => {
   res.json({ message: "Back-end is running..." });

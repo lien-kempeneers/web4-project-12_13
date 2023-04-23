@@ -12,6 +12,7 @@ datasource db {
 
 model User {
   id       Int    @id @default(autoincrement())
+  usernae  String
   email    String @unique
   password String
   task     Task[]

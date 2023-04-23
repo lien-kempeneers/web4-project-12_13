@@ -11,12 +11,14 @@ export const mapToUsers = (prismaUsers): User[] => {
 
 export const mapToUser = ({
     id,
+    username,
     email,
     password,
 }: UserPrisma)
 : User =>
 new User({
     id,
+    username,
     email,
     password
 }
