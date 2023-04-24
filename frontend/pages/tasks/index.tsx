@@ -3,7 +3,7 @@ import TaskService from "../../service/TaskService"
 import Header from "../../components/Header"
 import { Task } from "../../types"
 import TaskOverviewTable from "@/components/tasks/TaskOverviewTable"
-
+import Head from "next/head"
 
 const Tasks : React.FC = () => {
     //const users = [{"username":"test","password":"test"},{"username":"test2","password":"test2"}]
@@ -20,9 +20,9 @@ const Tasks : React.FC = () => {
 
     return (
         <>
-            <head>
+            <Head>
                 <title>Tasks</title>
-            </head>
+            </Head>
             <Header></Header>
             <main> 
                 <TaskOverviewTable tasks={tasks}></TaskOverviewTable>

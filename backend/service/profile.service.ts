@@ -3,11 +3,11 @@ import profileDB from "../domain/data-access/profile.db";
 import { profile } from "console";
 
 
-const getAllProfiles = async ({}): Promise<Profile[]> => {
+const getAllProfiles = async (): Promise<Profile[]> => {
     return await profileDB.getAllProfiles();
 }
 
-const getProfile = async ({id}): Promise<Profile> => {
+const getProfile = async ({String: id}): Promise<Profile> => {
     if(!id || Number.isNaN(Number(id))){
         throw new Error('Id is invalid');
     }
@@ -29,7 +29,7 @@ const createProfile = async ({name, biography}:Profile): Promise<Profile> => {
 
 const updateProfile = async ({id, name, biography}:Profile): Promise<Profile> => {
     
-    const profile = await getProfile({id:id});
+    const profile = await getProfile({String:id});
     if(!profile){
         throw new Error('Profile doesn\'t exist');
     }
@@ -46,9 +46,9 @@ const updateProfile = async ({id, name, biography}:Profile): Promise<Profile> =>
     })
 };
 
-const deleteProfile = async ({id}:Profile): Promise<Profile> => {
+const deleteProfile = async ({String: id}): Promise<Profile> => {
     
-    const profile = await getProfile({id:id});
+    const profile = await getProfile({String:id});
     if(!profile){
         throw new Error('Profile doesn\'t exist');
     }
@@ -58,7 +58,7 @@ const deleteProfile = async ({id}:Profile): Promise<Profile> => {
 };
 
 const upsertProfile = async ({id, name, biography}:Profile): Promise<Profile> => {
-    const profile = await getProfile({id:id});
+    const profile = await getProfile({String:id});
     if(!profile){
         throw new Error('Profile doesn\'t exist');
     }

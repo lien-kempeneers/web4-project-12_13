@@ -3,6 +3,7 @@ import ProfileService from "../../service/ProfileService"
 import Header from "../../components/Header"
 import { Profile } from "../../types"
 import ProfileOverviewTable from "../../components/profiles/ProfileOverviewTable"
+import Head from "next/head"
 
 
 const Profiles : React.FC = () => {
@@ -20,9 +21,9 @@ const Profiles : React.FC = () => {
 
     return (
         <>
-            <head>
+            <Head>
                 <title>Profiles</title>
-            </head>
+            </Head>
             <Header></Header>
             <main> 
                 <ProfileOverviewTable profiles={profiles}></ProfileOverviewTable>

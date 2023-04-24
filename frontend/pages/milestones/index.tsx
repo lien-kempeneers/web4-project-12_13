@@ -3,6 +3,7 @@ import MilestoneService from "../../service/MilestoneService"
 import Header from "../../components/Header"
 import { Milestone } from "../../types"
 import MilestoneOverviewTable from "../../components/milestones/MilestoneOverviewTable"
+import Head from "next/head"
 
 
 const Milestones : React.FC = () => {
@@ -20,9 +21,9 @@ const Milestones : React.FC = () => {
 
     return (
         <>
-            <head>
+            <Head>
                 <title>Milestones</title>
-            </head>
+            </Head>
             <Header></Header>
             <main> 
                 <MilestoneOverviewTable milestones={milestones}></MilestoneOverviewTable>

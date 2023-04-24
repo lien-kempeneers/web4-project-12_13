@@ -34,8 +34,9 @@
 *          description: Succesfully deleted a profile
 */
 const profileRouter = require('express').Router();
-const profileService = require('../service/profile.service');
+import profileService from '../service/profile.service';
 import express, {Request, Response} from 'express';
+import { Profile } from '../domain/model/profile';
 
 profileRouter.get('/', async (req: Request, res: Response) => {
     try{
@@ -48,7 +49,7 @@ profileRouter.get('/', async (req: Request, res: Response) => {
 
 profileRouter.get('/:id', async (req: Request, res: Response) => {
     try{
-        const profile = await profileService.getProfileById(req.params.id);
+        const profile = await profileService.getProfile( {String:req.params.id});
         res.status(200).json(profile);
     } catch (err) {
         res.status(500).json({status: 'error', message: err.message});
@@ -58,7 +59,7 @@ profileRouter.get('/:id', async (req: Request, res: Response) => {
 profileRouter.post('/', async  (req: Request, res: Response) => {
     const ProfileInput = req.body;
     try{
-        const profile = await profileService.addProfile(ProfileInput);
+        const profile = await profileService.createProfile(ProfileInput);
         res.status(200).json(profile);
     } catch (err) {
         res.status(500).json({status: 'error', message: err.message});
@@ -77,7 +78,7 @@ profileRouter.put('/', async  (req: Request, res: Response) => {
 
 profileRouter.delete('/:id', async  (req: Request, res: Response) => {
     try{
-        const profile = await profileService.deleteProfile(req.params.id);
+        const profile = await profileService.deleteProfile({String:req.params.id});
         res.status(200).json(profile);
     } catch (err) {
         res.status(500).json({status: 'error', message: err.message});

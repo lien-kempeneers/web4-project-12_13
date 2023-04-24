@@ -3,6 +3,7 @@ import UserService from "../../service/UserService"
 import Header from "../../components/Header"
 import UserOverviewTable from "../../components/users/UserOverviewTable"
 import { User } from "../../types"
+import Head from "next/head"
 
 
 const Users : React.FC = () => {
@@ -20,9 +21,9 @@ const Users : React.FC = () => {
 
     return (
         <>
-            <head>
+            <Head>
                 <title>Users</title>
-            </head>
+            </Head>
             <Header></Header>
             <main> 
                 <UserOverviewTable users={users}></UserOverviewTable>
