@@ -1,11 +1,11 @@
 import {User} from '../domain/model/user';
 import UserDB from '../domain/data-access/user.db';
 
-const getAllUsers = async ({}): Promise<User[]> => {
+const getAllUsers = async (): Promise<User[]> => {
     return await UserDB.getAllUsers();
 }
 
-const getUser = async ({id}): Promise<User> => {
+const getUser = async ({id: id}): Promise<User> => {
     if(!id || Number.isNaN(Number(id))){
         throw new Error('Id is invalid');
     }
@@ -51,7 +51,7 @@ const updateUser = async ({id, email, password}:User): Promise<User> => {
     })
 };
 
-const deleteUser = async ({id}:User): Promise<User> => {
+const deleteUser = async ({String: id}): Promise<User> => {
     
     const user = await getUser({id:id});
     if(!user){

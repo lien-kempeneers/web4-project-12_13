@@ -9,7 +9,7 @@
 *        '200':
 *          description: Succesfully received a list of all the profiles
 *      servers:
-*        - url: http://localhost:3000
+*        - url: http://localhost:3000/
 *    put:
 *      description: Update a profile that's in the database
 *      summary: Update a profile
@@ -17,7 +17,7 @@
 *        '200':
 *          description: Succesfully updated a profile
 *      servers:
-*        - url: http://localhost:3000
+*        - url: http://localhost:3000/
 *    post:
 *      description: Add a profile to the database 
 *      summary: Add a profile
@@ -25,7 +25,7 @@
 *        '200':
 *          description: Succesfully added a profile
 *      servers:
-*        - url: http://localhost:3000
+*        - url: http://localhost:3000/
 *    delete:
 *      summary: Delete a profile
 *      description: Delete a specific profile from the database
@@ -49,7 +49,7 @@ profileRouter.get('/', async (req: Request, res: Response) => {
 
 profileRouter.get('/:id', async (req: Request, res: Response) => {
     try{
-        const profile = await profileService.getProfile( {String:req.params.id});
+        const profile = await profileService.getProfile( {id:req.params.id});
         res.status(200).json(profile);
     } catch (err) {
         res.status(500).json({status: 'error', message: err.message});
@@ -66,7 +66,7 @@ profileRouter.post('/', async  (req: Request, res: Response) => {
     }
 });
 
-profileRouter.put('/', async  (req: Request, res: Response) => {
+profileRouter.put('/:id', async  (req: Request, res: Response) => {
     const ProfileInput = req.body;
     try{
         const profile = await profileService.upsertProfile(ProfileInput);

@@ -1,12 +1,12 @@
 import {Task} from '../domain/model/task';
 import TaskDB from '../domain/data-access/task.db';
 
-const getAllTasks = async ({}): Promise<Task[]> => {
+const getAllTasks = async (): Promise<Task[]> => {
     return await TaskDB.getAllTasks();
 }
 
 
-const getTask = async ({id}): Promise<Task> => {
+const getTask = async ({id:id}): Promise<Task> => {
     if(!id || Number.isNaN(Number(id))){
         throw new Error('Id is invalid');
     }
@@ -52,7 +52,7 @@ const updateTask = async ({id, title, description, deadline, userId}:Task): Prom
         userId:userId
     })
 };
-const deleteTask = async ({id}:Task): Promise<Task> => {
+const deleteTask = async ({String: id}): Promise<Task> => {
     
     const task = await getTask({id:id});
     if(!task){
