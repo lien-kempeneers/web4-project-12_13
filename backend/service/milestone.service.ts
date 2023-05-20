@@ -1,12 +1,12 @@
 import {Milestone} from '../domain/model/milestone';
 import MilestoneDB from '../domain/data-access/milestone.db';
-import {MilestoneInput} from '../types/types';
+import '../types';
 
 const getAllMilestones = async (): Promise<Milestone[]> => {
     return await MilestoneDB.getAllMilestones();
 };
 
-const getMilestone = async ({id}: MilestoneInput): Promise<Milestone> => {
+const getMilestone = async ({id}): Promise<Milestone> => {
     if(!id || Number.isNaN(Number(id))){
         throw new Error('Id is invalid');
     }

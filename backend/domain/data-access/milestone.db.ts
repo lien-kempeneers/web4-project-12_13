@@ -17,10 +17,10 @@ const getAllMilestones = async (): Promise<Milestone[]> => {
 }
 
 const getMilestone = async ({id}): Promise<Milestone> => {
-    try{
+    try {
         const milestonePrisma = await prisma.milestone.findUnique({where:{id:id}})
         return mapToMilestone(milestonePrisma);
-    }catch (error){
+    } catch (error) {
         console.error(error);
         throw new Error("Database error. See server log for details.")
     }
