@@ -34,9 +34,10 @@
 *          description: Succesfully deleted a task
 */
 
-const taskRouter = require('express').Router();
 import taskService from '../service/task.service';
 import express, {Request, Response} from 'express';
+
+const taskRouter = require('express').Router();
 
 taskRouter.get('/', async (req: Request, res: Response) => {
     try{

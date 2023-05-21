@@ -18,7 +18,11 @@ const getAllMilestones = async (): Promise<Milestone[]> => {
 
 const getMilestone = async ({id}): Promise<Milestone> => {
     try {
-        const milestonePrisma = await prisma.milestone.findUnique({where:{id:id}})
+        const milestonePrisma = await prisma.milestone.findUnique({
+            where: {
+                id: id
+            }
+        })
         return mapToMilestone(milestonePrisma);
     } catch (error) {
         console.error(error);
@@ -26,15 +30,24 @@ const getMilestone = async ({id}): Promise<Milestone> => {
     }
 }
 
-const createMilestone = async ({title, description, deadline, taskId}): Promise<Milestone> => {
+const createMilestone = async ({
+    title, 
+    description, 
+    deadline, 
+    taskId
+    } : {
+        title: string,
+        description: string,
+        deadline: Date,
+        taskId: number
+    }): Promise<Milestone> => {
     try{
         const milestonePrisma = await prisma.milestone.create({
         data:{
-            title: title,
-            description: description,
-            deadline: deadline,
-            taskId: taskId
-        }})
+            title,
+            description,
+            deadline,
+            taskId}});
         return mapToMilestone(milestonePrisma);
     }catch (error){
         console.error(error);

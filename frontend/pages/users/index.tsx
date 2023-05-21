@@ -4,6 +4,7 @@ import Header from "../../components/Header"
 import UserOverviewTable from "../../components/users/UserOverviewTable"
 import { User } from "../../types"
 import Head from "next/head"
+import Link from "next/link"
 
 
 const Users : React.FC = () => {
@@ -24,8 +25,8 @@ const Users : React.FC = () => {
             <Head>
                 <title>Users</title>
             </Head>
-            <Header></Header>
-            <main> 
+            <main > 
+                <Header></Header>
                 <UserOverviewTable users={users}></UserOverviewTable>
             </main>
         </>

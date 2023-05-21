@@ -1,5 +1,26 @@
 /**
 * @swagger
+*   components:
+*    schemas:
+*      Milestone:
+*          type: object
+*          properties:
+*            id:
+*              type: integer
+*              format: int64
+*            title:
+*              type: string
+*              description: The title of the milestone
+*            description:
+*              type: string
+*              description: The description of the milestone
+*            deadline:
+*              type: string
+*              description: The deadline of the milestone
+*            taskId:
+*              type: integer
+*              description: The id of the task the milestone belongs to
+*          
 * paths:
 *  /milestone/:
 *    get:
@@ -32,11 +53,31 @@
 *      responses:
 *        '200':
 *          description: Succesfully deleted a milestone
+* /milestone/{id}:
+*    get:
+*      description: Get a specific milestone from the database
+*      summary: Get a milestone
+*      responses:
+*        200:
+*          description: Succesfully retrieved a milestone
+*          content:
+*            application/json:
+*              schema:
+*                $ref: '#/components/schemas/Milestone'
+*      parameters:
+*        - name: id
+*          in: path
+*          required: true
+*          schema:
+*            type: integer
+*            format: int64
 */
 
-const milestoneRouter = require('express').Router();
+import { Milestone } from '@prisma/client';
 import milestoneService from '../service/milestone.service';
 import express, {Request, Response} from 'express';
+
+const milestoneRouter = require('express').Router();
 
 milestoneRouter.get('/', async (req: Request, res: Response) => {
     try{
@@ -57,7 +98,7 @@ milestoneRouter.get('/:id', async (req: Request, res: Response) => {
 });
 
 milestoneRouter.post('/', async  (req: Request, res: Response) => {
-    const milestoneInput = req.body;
+    const milestoneInput = <Milestone>req.body;
     try{
         const milestone = await milestoneService.createMilestone(milestoneInput);
         res.status(200).json(milestone);

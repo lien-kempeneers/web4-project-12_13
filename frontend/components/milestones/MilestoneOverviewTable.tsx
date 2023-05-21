@@ -1,5 +1,6 @@
 import React from "react";
 import { Milestone } from "../../types";
+import Link from "next/link";
 
 type Props = {
     milestones: Array<Milestone>;

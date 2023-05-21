@@ -1,6 +1,5 @@
 import {Milestone} from '../domain/model/milestone';
 import MilestoneDB from '../domain/data-access/milestone.db';
-import '../types';
 
 const getAllMilestones = async (): Promise<Milestone[]> => {
     return await MilestoneDB.getAllMilestones();

@@ -33,10 +33,11 @@
 *        '200':
 *          description: Succesfully deleted a profile
 */
-const profileRouter = require('express').Router();
 import profileService from '../service/profile.service';
 import express, {Request, Response} from 'express';
 import { Profile } from '../domain/model/profile';
+
+const profileRouter = require('express').Router();
 
 profileRouter.get('/', async (req: Request, res: Response) => {
     try{

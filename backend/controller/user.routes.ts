@@ -34,9 +34,10 @@
 *          description: Succesfully deleted a user
 */
 
-const userRouter = require('express').Router();
 import userService from '../service/user.service';
 import express, {Request, Response} from 'express';
+
+const userRouter = require('express').Router();
 
 userRouter.get('/', async (req: Request, res: Response) => {
     try{
