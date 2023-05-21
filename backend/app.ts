@@ -38,6 +38,12 @@ app.get("/status", (req, res) => {
 
 app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+
+var { expressjwt: expressjwt } = require("express-jwt");
+const jwtSecret = process.env.JWT_SECRET;
+
+app.use( expressjwt({ secret: jwtSecret, algorithms: ['HS256'] }).unless({ path: ["/^/api-docs(/.*)?$/", "/user/login", "/user/add", "/status"] }));
+
 app.listen(port || 3000, () => {
   console.log(`Back-end is running on port ${port}.`);
 });

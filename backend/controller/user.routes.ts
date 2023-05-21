@@ -34,6 +34,7 @@
 *          description: Succesfully deleted a user
 */
 
+import { User } from '@prisma/client';
 import userService from '../service/user.service';
 import express, {Request, Response} from 'express';
 
@@ -83,6 +84,16 @@ userRouter.delete('/:id', async  (req: Request, res: Response) => {
         res.status(200).json(user);
     } catch (err) {
         res.status(500).json({status: 'error', message: err.message});
+    }
+});
+
+userRouter.post('/login', async  (req: Request, res: Response) => {
+    try{
+        const userInput: User = req.body;
+        const token = await userService.authenticate(userInput);
+        res.status(200).json({message: 'authentication successful', token});
+    } catch (error) {
+        res.status(401).json({status: 'unauthorized', message: error.message});
     }
 });
 

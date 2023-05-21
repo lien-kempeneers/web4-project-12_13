@@ -3,7 +3,7 @@ const getAllUsers = () => {
 }
 
 const UserService = {
-    getAllUsers
+    getAllUsers,
 }
 
 export default UserService;

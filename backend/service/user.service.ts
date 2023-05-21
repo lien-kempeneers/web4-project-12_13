@@ -1,5 +1,7 @@
 import {User} from '../domain/model/user';
 import UserDB from '../domain/data-access/user.db';
+import jwt from 'jsonwebtoken';
+import { error } from 'console';
 
 const getAllUsers = async (): Promise<User[]> => {
     return await UserDB.getAllUsers();
@@ -11,6 +13,7 @@ const getUser = async ({id: id}): Promise<User> => {
     }
     return await UserDB.getUser({id:id});
 }
+
 
 const createUser = async ({id, username, email, password}:User): Promise<User> => {
     if(!id || Number.isNaN(Number(id))){
@@ -62,10 +65,37 @@ const deleteUser = async ({String: id}): Promise<User> => {
     })
 };
 
+const jwtSecret = process.env.JWT_SECRET;
+
+const generateJwtToken = (username: string): string => {
+    const options = { expiresIn: `${process.env.JWT_EXPIRATION_TIME}h`, issuer: '' };
+
+    try{
+        return jwt.sign({ username }, jwtSecret, options);
+    } catch (err) {
+        console.log(error);
+        throw new Error('Error while generating JWT token');
+    }
+};
+
+const bcrypt = require('bcrypt');
+
+
+const authenticate = async ({ id, password}: User): Promise<string> => {
+    const user = await getUser({id});
+    const isValidPassword = await bcrypt.compare(password, user.password);
+    if (!isValidPassword) {
+        throw new Error('Invalid password');
+    }
+    return generateJwtToken(user.username);
+};
+
 export default {
     getAllUsers,
     getUser,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    authenticate
 };
+
