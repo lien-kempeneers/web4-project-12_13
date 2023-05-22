@@ -1,5 +1,5 @@
 import * as dotenv from "dotenv";
-import express from "express";
+import express, { NextFunction } from "express";
 import cors from "cors";
 import * as bodyParser from "body-parser";
 import swaggerJSDoc from "swagger-jsdoc";
@@ -20,6 +20,20 @@ const swaggerOpts = {
       title: "Back-end",
       version: "1.0.0",
     },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
   apis: ["./controller/*.routes.ts"],
 };
@@ -38,9 +52,18 @@ app.get("/status", (req, res) => {
 
 app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+/* app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
+  if (error.name === "UnauthorizedError") {
+    res.status(401).json({ status: 'unauthorized', message:error.message });
+  } else {
+    next();
+  }
+}); */
 
 var { expressjwt: expressjwt } = require("express-jwt");
 const jwtSecret = process.env.JWT_SECRET;
+
+
 
 app.use( expressjwt({ secret: jwtSecret, algorithms: ['HS256'] }).unless({ path: ["/^/api-docs(/.*)?$/", "/user/login", "/user/add", "/status"] }));
 

@@ -1,5 +1,27 @@
 /**
 * @swagger
+*   components:
+*    schemas:
+*      Task:
+*          type: object
+*          properties:
+*            id:
+*              type: integer
+*              format: int64
+*            title:
+*              type: string
+*              description: The title of the task
+*            description:
+*              type: string
+*              description: The description of the task
+*            deadline:
+*              type: date
+*              description: The deadline of the task
+*            userId:
+*              type: integer
+*              format: int64
+*              description: The id of the user the task belongs to
+*
 * paths:
 *  /task/:
 *    get:
@@ -32,6 +54,24 @@
 *      responses:
 *        '200':
 *          description: Succesfully deleted a task
+* /task/{id}:
+*    get:
+*      description: Get a specific task from the database
+*      summary: Get a task
+*      responses:
+*        200:
+*          description: Succesfully retrieved a task
+*          content:
+*            application/json:
+*              schema:
+*                $ref: '#/components/schemas/Task'
+*      parameters:
+*        - name: id
+*          in: path
+*          required: true
+*          schema:
+*            type: integer
+*            format: int64
 */
 
 import taskService from '../service/task.service';

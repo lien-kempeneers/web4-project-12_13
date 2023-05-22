@@ -28,6 +28,11 @@ const createUser = async ({id, username, email, password}:User): Promise<User> =
     if(password.length == 0){
         throw new Error('Password can\'t be empty');
     }
+    const existingUser = await UserDB.getUser({id:id});
+    if(existingUser){
+        throw new Error(`User with username ${username} already exists`);
+    }
+    const hashedPassword = await bcrypt.hash(password, 12);
     return await UserDB.createUser({
         username:username,
         email:email,

@@ -1,5 +1,23 @@
 /**
 * @swagger
+*   components:
+*    schemas:
+*      User:
+*          type: object
+*          properties:
+*            id:
+*              type: integer
+*              format: int64
+*            username:
+*              type: string
+*              description: The username of the user
+*            email:
+*              type: string
+*              description: The email of the user
+*            password:
+*              type: string
+*              description: The password of the user
+*
 * paths:
 *  /user/:
 *    get:
@@ -32,6 +50,24 @@
 *      responses:
 *        '200':
 *          description: Succesfully deleted a user
+* /user/{id}:
+*    get:
+*      description: Get a specific user from the database
+*      summary: Get a profile
+*      responses:
+*        200:
+*          description: Succesfully retrieved a user
+*          content:
+*            application/json:
+*              schema:
+*                $ref: '#/components/schemas/User'
+*      parameters:
+*        - name: id
+*          in: path
+*          required: true
+*          schema:
+*            type: integer
+*            format: int64
 */
 
 import { User } from '@prisma/client';
@@ -85,6 +121,15 @@ userRouter.delete('/:id', async  (req: Request, res: Response) => {
     } catch (err) {
         res.status(500).json({status: 'error', message: err.message});
     }
+});
+
+userRouter.post('/signup', async  (req: Request, res: Response) => {
+    const userInput = <User>req.body;
+    if(!userInput.username || !userInput.password) {
+        throw new Error('username and password are required fields');
+    }
+    const user = await userService.createUser(userInput);
+    res.status(200).json(user);
 });
 
 userRouter.post('/login', async  (req: Request, res: Response) => {
