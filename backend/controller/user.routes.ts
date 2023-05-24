@@ -21,11 +21,8 @@
 *      description: List all users that are in the database
 *      summary: List all users
 *      responses:
-*        '200':
+*        200:
 *          description: Succesfully received a list of all the users
-*      servers:
-*        - url: http://localhost:3000/
-*    
 *    post:
 *      description: Add a user to the database 
 *      summary: Create a user
@@ -37,10 +34,8 @@
 *            schema:
 *              $ref: '#/components/schemas/User'
 *      responses:
-*        '200':
+*        200:
 *          description: Succesfully added a user
-*      servers:
-*        - url: http://localhost:3000/
 * /user/{id}:
 *    get:
 *      description: Get a specific user from the database

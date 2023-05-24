@@ -16,22 +16,20 @@ const getUser = async (id): Promise<User> => {
 
 
 const createUser = async (userInput:User): Promise<User> => {
-    /* if(!id || Number.isNaN(Number(id))){
-        throw new Error('Id can\'t be set');
-    } */
     if(userInput.username.length == 0){
         throw new Error('Username can\'t be empty');
     }
     if(userInput.email.length == 0){
         throw new Error('Email can\'t be empty');
     }
-    if(userInput.password.length == 0){
-        throw new Error('Password can\'t be empty');
-    }
     const existingUser = await UserDB.getUserByEmail({email:userInput.email});
     if(existingUser){
         throw new Error(`User with email adres ${userInput.email} already exists`);
     }
+    if(userInput.password.length == 0){
+        throw new Error('Password can\'t be empty');
+    }
+    
     const hashedPassword = await bcrypt.hash(userInput.password, 12);
     return await UserDB.createUser({
         username:userInput.username,
@@ -42,7 +40,7 @@ const createUser = async (userInput:User): Promise<User> => {
 
 const updateUser = async (id,{username, email, password}:User): Promise<User> => {
     
-    const user = await getUser({id:id});
+    const user = await getUser(id);
     if(!user){
         throw new Error('User doesn\'t exist');
     }

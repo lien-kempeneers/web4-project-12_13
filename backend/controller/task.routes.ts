@@ -32,20 +32,20 @@
 *          description: Succesfully received a list of all the tasks
 *      servers:
 *        - url: http://localhost:3000
-*    put:
-*      description: Update a task that's in the database
-*      summary: Update a task
-*      responses:
-*        '200':
-*          description: Succesfully updated a task
-*      servers:
-*        - url: http://localhost:3000
 *    post:
 *      description: Add a task to the database 
 *      summary: Add a task
 *      responses:
 *        '200':
 *          description: Succesfully added a task
+*      servers:
+*        - url: http://localhost:3000
+*    put:
+*      description: Update a task that's in the database
+*      summary: Update a task
+*      responses:
+*        '200':
+*          description: Succesfully updated a task
 *      servers:
 *        - url: http://localhost:3000
 *    delete:
