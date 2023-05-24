@@ -54,29 +54,8 @@ const deleteProfile = async ({id}): Promise<Profile> => {
     }
 }
 
-const upsertProfile = async ({id, name, biography}): Promise<Profile> => {
-    try {
-        const profilePrisma = await prisma.profile.upsert({
-            where: {
-                id: id,
-            },
-            update: {
-                name: name,
-                biography: biography,
-            },
-            create: {
-                name: name,
-                biography: biography,
-            }
-        })
-        return mapToProfile(profilePrisma);
-    } catch (error) {
-        console.error(error);
-        throw new Error("Database error. See server log for details.")
-    }
-}
 
-const updateProfile = async ({id, name, biography}): Promise<Profile> => {
+const updateProfile = async (id, { name, biography}): Promise<Profile> => {
     try {
         const profilePrisma = await prisma.profile.update({
             where: {
@@ -99,6 +78,5 @@ export default {
     getProfile,
     createProfile,
     deleteProfile,
-    upsertProfile,
     updateProfile,
 };

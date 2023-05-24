@@ -5,9 +5,6 @@
 *      Profile:
 *          type: object
 *          properties:
-*            id:
-*              type: integer
-*              format: int64
 *            name:
 *              type: string
 *              description: The name of the profile
@@ -20,54 +17,33 @@
 *    get:
 *      description: List all profiles that are in the database
 *      summary: List all profiles
-*      security:
-*        - bearerAuth: []
 *      responses:
-*        '200':
+*        200:
 *          description: Succesfully received a list of all the profiles
-*      servers:
-*        - url: http://localhost:3000/
-*    put:
-*      description: Update a profile that's in the database
-*      summary: Update a profile
-*      security:
-*        - bearerAuth: []
-*      responses:
-*        '200':
-*          description: Succesfully updated a profile
-*      servers:
-*        - url: http://localhost:3000/
 *    post:
 *      description: Add a profile to the database 
-*      summary: Add a profile
-*      security:
-*        - bearerAuth: []
+*      summary: Create a profile
+*      requestBody:
+*        required: true
+*        summary: Add a profile
+*        content:
+*          application/json:
+*            schema:
+*              $ref: '#/components/schemas/Profile'
 *      responses:
-*        '200':
+*        200:
 *          description: Succesfully added a profile
-*      servers:
-*        - url: http://localhost:3000/
-*    delete:
-*      description: Delete a specific profile from the database
-*      summary: Delete a profile
-*      security:
-*        - bearerAuth: []
-*      responses:
-*        '200':
-*          description: Succesfully deleted a profile
 * /profile/{id}:
 *    get:
 *      description: Get a specific profile from the database
 *      summary: Get a profile
-*      security:
-*        - bearerAuth: []
 *      responses:
 *        200:
 *          description: Succesfully retrieved a profile
 *          content:
 *            application/json:
 *              schema:
-*                $ref: '#/components/schemas/Profile'
+*                $ref: '#/components/schemas/profile'
 *      parameters:
 *        - name: id
 *          in: path
@@ -75,6 +51,37 @@
 *          schema:
 *            type: integer
 *            format: int64
+*    put:
+*      description: Update a profile that's in the database
+*      summary: Update a profile
+*      requestBody:
+*        content:
+*          application/json:
+*            schema:
+*              $ref: '#/components/schemas/Profile'
+*      parameters:
+*        - name: id
+*          in: path
+*          required: true
+*          schema:
+*            type: integer
+*            format: int64
+*      responses:
+*        200:
+*          description: Succesfully updated a profile
+*    delete:
+*      summary: Delete a profile
+*      description: Delete a specific profile from the database
+*      parameters:
+*        - name: id
+*          in: path
+*          required: true
+*          schema:
+*            type: integer
+*            format: int64
+*      responses:
+*        200:
+*          description: Succesfully deleted a profile
 */
 import profileService from '../service/profile.service';
 import express, {Request, Response} from 'express';
@@ -93,7 +100,7 @@ profileRouter.get('/', async (req: Request, res: Response) => {
 
 profileRouter.get('/:id', async (req: Request, res: Response) => {
     try{
-        const profile = await profileService.getProfile( {id:req.params.id});
+        const profile = await profileService.getProfile( parseInt(req.params.id));
         res.status(200).json(profile);
     } catch (err) {
         res.status(500).json({status: 'error', message: err.message});
@@ -113,7 +120,7 @@ profileRouter.post('/', async  (req: Request, res: Response) => {
 profileRouter.put('/:id', async  (req: Request, res: Response) => {
     const ProfileInput = req.body;
     try{
-        const profile = await profileService.upsertProfile(ProfileInput);
+        const profile = await profileService.updateProfile(parseInt(req.params.id), ProfileInput);
         res.status(200).json(profile);
     } catch (err) {
         res.status(500).json({status: 'error', message: err.message});
@@ -122,7 +129,7 @@ profileRouter.put('/:id', async  (req: Request, res: Response) => {
 
 profileRouter.delete('/:id', async  (req: Request, res: Response) => {
     try{
-        const profile = await profileService.deleteProfile({String:req.params.id});
+        const profile = await profileService.deleteProfile(parseInt(req.params.id));
         res.status(200).json(profile);
     } catch (err) {
         res.status(500).json({status: 'error', message: err.message});

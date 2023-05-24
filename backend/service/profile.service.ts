@@ -7,7 +7,7 @@ const getAllProfiles = async (): Promise<Profile[]> => {
     return await profileDB.getAllProfiles();
 }
 
-const getProfile = async ({id: id}): Promise<Profile> => {
+const getProfile = async (id): Promise<Profile> => {
     if(!id || Number.isNaN(Number(id))){
         throw new Error('Id is invalid');
     }
@@ -27,9 +27,9 @@ const createProfile = async ({name, biography}:Profile): Promise<Profile> => {
     })
 };
 
-const updateProfile = async ({id, name, biography}:Profile): Promise<Profile> => {
+const updateProfile = async (id, { name, biography}:Profile): Promise<Profile> => {
     
-    const profile = await getProfile({id:id});
+    const profile = await getProfile(id);
     if(!profile){
         throw new Error('Profile doesn\'t exist');
     }
@@ -39,16 +39,15 @@ const updateProfile = async ({id, name, biography}:Profile): Promise<Profile> =>
     if(biography.length == 0){
         throw new Error('Biography can\'t be empty');
     }
-    return await profileDB.updateProfile({
-        id: id,
+    return await profileDB.updateProfile(id,{
         name:name,
         biography:biography
     })
 };
 
-const deleteProfile = async ({String: id}): Promise<Profile> => {
+const deleteProfile = async ( id): Promise<Profile> => {
     
-    const profile = await getProfile({id:id});
+    const profile = await getProfile(id);
     if(!profile){
         throw new Error('Profile doesn\'t exist');
     }
@@ -57,31 +56,11 @@ const deleteProfile = async ({String: id}): Promise<Profile> => {
     })
 };
 
-const upsertProfile = async ({id, name, biography}:Profile): Promise<Profile> => {
-    const profile = await getProfile({id:id});
-    if(!profile){
-        throw new Error('Profile doesn\'t exist');
-    }
-
-    if(name.length == 0){
-        throw new Error('Name can\'t be empty');
-    }
-    if(biography.length == 0){
-        throw new Error('Biography can\'t be empty');
-    }
-    return await profileDB.upsertProfile({
-        id: id,
-        name:name,
-        biography:biography
-    })
-};
-
 
 export default {
     createProfile,
     deleteProfile,
     updateProfile,
-    upsertProfile,
     getProfile,
     getAllProfiles
 };
