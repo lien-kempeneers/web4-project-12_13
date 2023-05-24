@@ -9,17 +9,18 @@ import Link from "next/link"
 
 
 const Users : React.FC = () => {
-    //const users = [{"username":"test","password":"test"},{"username":"test2","password":"test2"}]
 
     const [users, setUsers] = useState<Array<User>>([])
 
     const getUsers = async () => {
-        UserService.getAllUsers().
-            then((jsonusers) => jsonusers.json()).
-                then((arrayusers) => setUsers(arrayusers)) 
+        UserService.getAllUsers()
+            .then((res) => res.json())
+            .then((users) => setUsers(users)) 
     }
 
-    useEffect(() => {getUsers()}, [])
+    useEffect(() => {
+        getUsers()
+    }, [])
 
     return (
         <>
@@ -28,8 +29,8 @@ const Users : React.FC = () => {
             </Head>
             <main > 
                 <Header></Header>
-                <UserOverviewTable users={users}></UserOverviewTable>
-                <AddUserForm></AddUserForm>
+                <UserOverviewTable users={users}/>
+                <AddUserForm/>
             </main>
         </>
     )
