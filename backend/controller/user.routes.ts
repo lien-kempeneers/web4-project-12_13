@@ -39,7 +39,7 @@
 * /user/{id}:
 *    get:
 *      description: Get a specific user from the database
-*      summary: Get a profile
+*      summary: Get a user
 *      responses:
 *        200:
 *          description: Succesfully retrieved a user

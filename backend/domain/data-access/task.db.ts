@@ -17,7 +17,7 @@ const getAllTasks = async (): Promise<Task[]> => {
 
 const getTask = async ({id}): Promise<Task> => {
     try {
-        const taskPrisma = await prisma.task.findUnique({where:{id:id}})
+        const taskPrisma = await prisma.task.findUnique({where:{id:parseInt(id)}})
         return mapToTask(taskPrisma);
     } catch (error) {
         console.error(error);
@@ -55,7 +55,7 @@ const deleteTask = async ({id}): Promise<Task> => {
     }
 }
 
-const updateTask = async ({id, title, description, deadline, userId}): Promise<Task> => {
+const updateTask = async (id,{ title, description, deadline, userId}): Promise<Task> => {
     try {
         const taskPrisma = await prisma.task.update({
             where: {

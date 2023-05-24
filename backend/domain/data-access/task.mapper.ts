@@ -4,7 +4,7 @@ import { Task as TaskPrisma} from "@prisma/client";
 export const mapToTasks = (prismaTasks): Task[] => {
     let tasks = [];
     for(let prismaTask of prismaTasks){
-        tasks.push(mapToTasks(prismaTask))
+        tasks.push(mapToTask(prismaTask))
     }
     return tasks;
 }

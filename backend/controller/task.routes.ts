@@ -5,9 +5,6 @@
 *      Task:
 *          type: object
 *          properties:
-*            id:
-*              type: integer
-*              format: int64
 *            title:
 *              type: string
 *              description: The title of the task
@@ -15,12 +12,11 @@
 *              type: string
 *              description: The description of the task
 *            deadline:
-*              type: date
+*              type: string
 *              description: The deadline of the task
 *            userId:
 *              type: integer
-*              format: int64
-*              description: The id of the user the task belongs to
+*              description: The userId of the user that created the task
 *
 * paths:
 *  /task/:
@@ -28,32 +24,21 @@
 *      description: List all tasks that are in the database
 *      summary: List all tasks
 *      responses:
-*        '200':
+*        200:
 *          description: Succesfully received a list of all the tasks
-*      servers:
-*        - url: http://localhost:3000
 *    post:
 *      description: Add a task to the database 
-*      summary: Add a task
+*      summary: Create a task
+*      requestBody:
+*        required: true
+*        summary: Add a task
+*        content:
+*          application/json:
+*            schema:
+*              $ref: '#/components/schemas/Task'
 *      responses:
-*        '200':
+*        200:
 *          description: Succesfully added a task
-*      servers:
-*        - url: http://localhost:3000
-*    put:
-*      description: Update a task that's in the database
-*      summary: Update a task
-*      responses:
-*        '200':
-*          description: Succesfully updated a task
-*      servers:
-*        - url: http://localhost:3000
-*    delete:
-*      summary: Delete a task
-*      description: Delete a specific task from the database
-*      responses:
-*        '200':
-*          description: Succesfully deleted a task
 * /task/{id}:
 *    get:
 *      description: Get a specific task from the database
@@ -72,6 +57,37 @@
 *          schema:
 *            type: integer
 *            format: int64
+*    put:
+*      description: Update a task that's in the database
+*      summary: Update a task
+*      requestBody:
+*        content:
+*          application/json:
+*            schema:
+*              $ref: '#/components/schemas/Task'
+*      parameters:
+*        - name: id
+*          in: path
+*          required: true
+*          schema:
+*            type: integer
+*            format: int64
+*      responses:
+*        200:
+*          description: Succesfully updated a task
+*    delete:
+*      summary: Delete a task
+*      description: Delete a specific task from the database
+*      parameters:
+*        - name: id
+*          in: path
+*          required: true
+*          schema:
+*            type: integer
+*            format: int64
+*      responses:
+*        200:
+*          description: Succesfully deleted a task
 */
 
 import taskService from '../service/task.service';
@@ -90,7 +106,7 @@ taskRouter.get('/', async (req: Request, res: Response) => {
 
 taskRouter.get('/:id', async (req: Request, res: Response) => {
     try{
-        const task = await taskService.getTask({id:req.params.id});
+        const task = await taskService.getTask(parseInt(req.params.id));
         res.status(200).json(task);
     } catch (err) {
         res.status(500).json({status: 'error', message: err.message});
@@ -110,7 +126,7 @@ taskRouter.post('/', async  (req: Request, res: Response) => {
 taskRouter.put('/:id', async  (req: Request, res: Response) => {
     const taskInput = req.body;
     try{
-        const task = await taskService.updateTask(taskInput);
+        const task = await taskService.updateTask(parseInt(req.params.id),taskInput);
         res.status(200).json(task);
     } catch (err) {
         res.status(500).json({status: 'error', message: err.message});
@@ -119,7 +135,7 @@ taskRouter.put('/:id', async  (req: Request, res: Response) => {
 
 taskRouter.delete('/:id', async  (req: Request, res: Response) => {
     try{
-        const task = await taskService.deleteTask({String:req.params.id});
+        const task = await taskService.deleteTask(parseInt(req.params.id));
         res.status(200).json(task);
     } catch (err) {
         res.status(500).json({status: 'error', message: err.message});

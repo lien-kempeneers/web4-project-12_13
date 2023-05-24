@@ -6,11 +6,11 @@ const getAllTasks = async (): Promise<Task[]> => {
 }
 
 
-const getTask = async ({id:id}): Promise<Task> => {
+const getTask = async (id): Promise<Task> => {
     if(!id || Number.isNaN(Number(id))){
         throw new Error('Id is invalid');
     }
-    return await TaskDB.getTask({id:id});
+    return await TaskDB.getTask({id});
 }
 
 
@@ -32,9 +32,9 @@ const createTask = async ({title, description, deadline, userId}:Task): Promise<
     })
 };
 
-const updateTask = async ({id, title, description, deadline, userId}:Task): Promise<Task> => {
+const updateTask = async (id, {title, description, deadline, userId}:Task): Promise<Task> => {
     
-    const task = await getTask({id:id});
+    const task = await getTask(id);
     if(!task){
         throw new Error('Task doesn\'t exist');
     }
@@ -44,17 +44,22 @@ const updateTask = async ({id, title, description, deadline, userId}:Task): Prom
     if(description.length == 0){
         throw new Error('Description can\'t be empty');
     }
-    return await TaskDB.updateTask({
-        id: id,
+    if(!deadline){
+        throw new Error('Deadline can\'t be empty');
+    }
+    if (!userId){
+        throw new Error('UserId can\'t be empty');
+    }
+    return await TaskDB.updateTask(id,{
         title: title,
         description:description,
         deadline:deadline,
         userId:userId
     })
 };
-const deleteTask = async ({String: id}): Promise<Task> => {
+const deleteTask = async (id): Promise<Task> => {
     
-    const task = await getTask({id:id});
+    const task = await getTask(id);
     if(!task){
         throw new Error('Task doesn\'t exist');
     }
