@@ -5,14 +5,14 @@ const getAllMilestones = async (): Promise<Milestone[]> => {
     return await MilestoneDB.getAllMilestones();
 };
 
-const getMilestone = async ({id}): Promise<Milestone> => {
+const getMilestone = async (id): Promise<Milestone> => {
     if(!id || Number.isNaN(Number(id))){
         throw new Error('Id is invalid');
     }
-    return await MilestoneDB.getMilestone({id: parseInt(id)});
+    return await MilestoneDB.getMilestone({id:id});
 }
 
-const createMilestone = async ({id, title, description, deadline, taskId}:Milestone): Promise<Milestone> => {
+const createMilestone = async ({ title, description, deadline, taskId}:Milestone): Promise<Milestone> => {
     if(title.length == 0){
         throw new Error('Title can\'t be empty');
     }
@@ -22,9 +22,6 @@ const createMilestone = async ({id, title, description, deadline, taskId}:Milest
     if(!deadline){
         throw new Error('Deadline can\'t be empty');
     }
-    if(!id || Number.isNaN(Number(id))){
-        throw new Error('Id is invalid');
-    }
     return await MilestoneDB.createMilestone({
         title:title,
         description:description,
@@ -32,9 +29,9 @@ const createMilestone = async ({id, title, description, deadline, taskId}:Milest
         taskId:taskId
     })
 };
-const updateMilestone = async ({id, title, description, deadline, taskId}:Milestone): Promise<Milestone> => {
+const updateMilestone = async (id,{ title, description, deadline, taskId}:Milestone): Promise<Milestone> => {
     
-    const milestone = await getMilestone({id:id});
+    const milestone = await getMilestone(id);
     if(!milestone){
         throw new Error('Milestone doesn\'t exist');
     }
@@ -50,8 +47,7 @@ const updateMilestone = async ({id, title, description, deadline, taskId}:Milest
     if(!taskId || Number.isNaN(Number(taskId))){
         throw new Error('taskId is invalid');
     }
-    return await MilestoneDB.updateMilestone({
-        id: id,
+    return await MilestoneDB.updateMilestone(id,{
         title:title,
         description:description,
         deadline:deadline,
@@ -59,9 +55,9 @@ const updateMilestone = async ({id, title, description, deadline, taskId}:Milest
     })
 };
 
-const deleteMilestone = async ({String: id}): Promise<Milestone> => {
+const deleteMilestone = async (id): Promise<Milestone> => {
     
-    const milestone = await getMilestone({id:id});
+    const milestone = await getMilestone(id);
     if(!milestone){
         throw new Error('Milestone doesn\'t exist');
     }

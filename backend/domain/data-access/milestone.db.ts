@@ -69,7 +69,7 @@ const deleteMilestone = async ({id}): Promise<Milestone> => {
     }
 }
 
-const updateMilestone = async ({id, title, description, deadline, taskId}): Promise<Milestone> => {
+const updateMilestone = async (id,{ title, description, deadline, taskId}): Promise<Milestone> => {
     try{
         const milestonePrisma = await prisma.milestone.update({
             where: {
