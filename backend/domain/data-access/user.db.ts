@@ -17,7 +17,7 @@ const getAllUsers = async (): Promise<User[]> => {
 
 const getUser = async ({id}): Promise<User> => {
     try{
-        const userPrisma = await prisma.user.findUnique({where:{id:id}})
+        const userPrisma = await prisma.user.findUnique({where:{id:parseInt(id)}})
         return mapToUser(userPrisma);
     } catch (error) {
         console.error(error);
@@ -25,14 +25,25 @@ const getUser = async ({id}): Promise<User> => {
     }
 }
 
+const getUserByEmail = async ({email}): Promise<User> => {
+    try{
+        const userPrisma = await prisma.user.findUnique({where:{email:email}})
+        
+        return mapToUser(userPrisma);
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
 
-const createUser = async ({username, email, password}:{username:string, email:string, password:string}): Promise<User> => {
+
+const createUser = async ({username, email, password}): Promise<User> => {
     try{
         const userPrisma = await prisma.user.create({
             data:{
                 username,
                 email,
-                password
+                password 
             }})
         return mapToUser(userPrisma);
     } catch (error) {
@@ -55,13 +66,14 @@ const deleteUser = async ({id}): Promise<User> => {
     }
 }
 
-const updateUser = async ({id, email, password}): Promise<User> => {
+const updateUser = async (id, {username, email, password}): Promise<User> => {
     try{
         const userPrisma = await prisma.user.update({
             where: {
                 id: id
             },
             data: {
+                username: username,
                 email: email,
                 password: password,
             }
@@ -76,6 +88,7 @@ const updateUser = async ({id, email, password}): Promise<User> => {
 export default { 
     getAllUsers, 
     getUser,
+    getUserByEmail,
     createUser,
     deleteUser,
     updateUser,
