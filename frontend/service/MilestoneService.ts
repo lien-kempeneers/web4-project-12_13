@@ -1,5 +1,5 @@
 const getAllMilestones = () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/milestone/', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/milestone', {
         method: 'GET'
     })
 }
@@ -17,7 +17,7 @@ const getMilestone = () => {
 }
 
 const createMilestone = () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/milestone/', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/milestone', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

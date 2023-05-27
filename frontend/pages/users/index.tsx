@@ -11,6 +11,7 @@ import Link from "next/link"
 const Users : React.FC = () => {
 
     const [users, setUsers] = useState<Array<User>>([])
+    console.log(users)
 
     const getUsers = async () => {
         UserService.getAllUsers()
