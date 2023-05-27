@@ -7,17 +7,18 @@ import Head from "next/head"
 
 
 const Profiles : React.FC = () => {
-    //const users = [{"username":"test","password":"test"},{"username":"test2","password":"test2"}]
 
     const [profiles, setProfile] = useState<Array<Profile>>([])
 
     const getProfiles = async () => {
-        ProfileService.getAllProfiles().
-            then((jsonprofiles) => jsonprofiles.json()).
-                then((arrayprofiles) => setProfile(arrayprofiles)) 
+        ProfileService.getAllProfiles()
+            .then((res) => res.json())
+            .then((profiles) => setProfile(profiles)) 
     }
 
-    useEffect(() => {getProfiles()}, [])
+    useEffect(() => {
+        getProfiles()
+    }, [])
 
     return (
         <>
