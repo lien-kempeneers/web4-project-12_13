@@ -19,6 +19,7 @@ const Users : React.FC = () => {
     }
 
     useEffect(() => {
+        console.log("test")
         getUsers()
     }, [])
 
@@ -30,7 +31,6 @@ const Users : React.FC = () => {
             <main > 
                 <Header></Header>
                 <UserOverviewTable users={users}/>
-                <AddUserForm/>
             </main>
         </>
     )

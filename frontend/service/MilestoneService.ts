@@ -1,11 +1,11 @@
 const getAllMilestones = () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/milestones', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/milestone/', {
         method: 'GET'
     })
 }
 
 const getMilestone = () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/milestones/{id}', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/milestone/{id}', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -17,7 +17,7 @@ const getMilestone = () => {
 }
 
 const createMilestone = () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/milestones', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/milestone/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -32,7 +32,7 @@ const createMilestone = () => {
 }
 
 const updateMilestone = () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/milestones/{id}', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/milestone/{id}', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -47,7 +47,7 @@ const updateMilestone = () => {
 }
 
 const deleteMilestone = () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/milestones/{id}', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/milestone/{id}', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'

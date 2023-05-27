@@ -1,11 +1,11 @@
 const getAllProfiles = () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/profiles', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/profile/', {
         method: 'GET'
     })
 }
 
 const getProfile = () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/profiles/{id}', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/profile/{id}', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -17,7 +17,7 @@ const getProfile = () => {
 }
 
 const createProfile = () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/profiles', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/profile/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -30,7 +30,7 @@ const createProfile = () => {
 }
 
 const updateProfile = () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/profiles/{id}', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/profile/{id}', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

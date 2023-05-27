@@ -1,11 +1,11 @@
 const getAllUsers = () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/users', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/', {
         method: 'GET'
     })
 }
 
 const getUser = () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/users/{id}', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/{id}', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -17,7 +17,7 @@ const getUser = () => {
 }
 
 const createUser = () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/users', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ const createUser = () => {
 }
 
 const updateUser = () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/users/{id}', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/{id}', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ const updateUser = () => {
 }
 
 const deleteUser = () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/users/{id}', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/{id}', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
