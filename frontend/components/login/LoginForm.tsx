@@ -3,29 +3,25 @@ import { User } from "../../types";
 import UserService from "@/service/UserService";
 import { json } from "stream/consumers";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react"
 
-
-const router = useRouter();
 
 
 const AddUserForm : React.FC = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [isEnable, setEnable] = useState(true);
 
 
-    function setPassword(value: string): void {
-        //throw new Error("Function not implemented.");
-    }
 
-    function setEmail(value: string): void {
-        //throw new Error("Function not implemented.");
-    }
 
     function handleSubmit(event: FormEvent<HTMLFormElement>): void {
+        event.preventDefault();
+        console.log(username, password);
+        //TODO handle login + store in session storage
         //throw new Error("Function not implemented.");
     }
 
-    function setName(value: string): void {
-        //throw new Error("Function not implemented.");
-    }
 
     return (
         <>
@@ -33,28 +29,19 @@ const AddUserForm : React.FC = () => {
             <div className="">
                 <label htmlFor="name">Username:</label>
             </div>
-            <input 
-                id="name"
-                type="text"
-                value={"username"}
-                onChange={(event) => setName(event.target.value)}
-            />
-            <div className="">
-                <label htmlFor="name">Email:</label>
-            </div>
             <input
-                id="email"
+                id="username"
                 type="text"
-                value={"email"}
-                onChange={(event) => setEmail(event.target.value)}
+                placeholder={"email"}
+                onChange={(event) => setUsername(event.target.value)}
             />
             <div className="">
                 <label htmlFor="name">Password:</label>
             </div>
             <input
                 id="password"
-                type="text"
-                value={"password"}
+                type="password"
+                placeholder={"password"}
                 onChange={(event) => setPassword(event.target.value)}
                 />
             <div className="">

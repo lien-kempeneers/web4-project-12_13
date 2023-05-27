@@ -7,9 +7,7 @@ const Header : React.FC = () => {
 <header>
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="/">Task App</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
+        
                 <ul className="navbar-nav mr-auto">
                     <li>
                         <Link href="/users" className="nav-link">Users</Link>
@@ -29,7 +27,7 @@ const Header : React.FC = () => {
                         <Link href="/" className="nav-link">Sign Up</Link>
                     </li>
                     <li>
-                        <Link href="/" className="nav-link">Login</Link>
+                        <Link href="/login" className="nav-link">Login</Link>
                     </li>
                 </ul>
     </nav>
