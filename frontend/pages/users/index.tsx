@@ -6,6 +6,7 @@ import AddUserForm from "../../components/users/AddUserForm"
 import { User } from "../../types"
 import Head from "next/head"
 import Link from "next/link"
+import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 
 const Users : React.FC = () => {

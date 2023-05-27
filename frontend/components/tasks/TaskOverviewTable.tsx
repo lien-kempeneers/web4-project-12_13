@@ -8,27 +8,27 @@ type Props = {
 const TaskOverviewTable : React.FC<Props> = ({tasks}:Props) => {
     return (
         <>
-            <div className="">
+            <div className="mx-5  shadow-lg shadow-inset p-3 mb-5 bg-white text-center mt-5">
                 {tasks && (
-                    <table className="">
-                        <thead>
+                    <table className="table table-striped table-light">
+                        <thead className="thead-dark">
                             <tr>
-                                <th className="">ID</th>
-                                <th className="">Title</th>
-                                <th className="">Description</th>
-                                <th className="">Deadline</th>
-                                <th className="">UserID</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Deadline</th>
+                                <th scope="col">User ID</th>
                             </tr>
                         </thead>
                         <tbody>
                             {tasks && 
                             tasks.map((task, index) => (
                                 <tr key={index}>
-                                    <td className="">{task.id}</td>
-                                    <td className="">{task.title}</td>
-                                    <td className="">{task.description}</td>
-                                    <td className="">{task.deadline.toString()}</td>
-                                    <td className="">{task.userId}</td>
+                                    <td scope="rod">{task.id}</td>
+                                    <td scope="row">{task.title}</td>
+                                    <td scope="row">{task.description}</td>
+                                    <td scope="row">{task.deadline.toString()}</td>
+                                    <td scope="row">{task.userId}</td>
                                 </tr>
                             ))}
                         </tbody>

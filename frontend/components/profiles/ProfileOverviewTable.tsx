@@ -8,23 +8,23 @@ type Props = {
 const ProfileOverviewTable : React.FC<Props> = ({profiles}:Props) => {
     return (
         <>
-            <div className="">
+            <div className="mx-5  shadow-lg shadow-inset p-3 mb-5 bg-white text-center mt-5">
                 {profiles && (
-                    <table className="">
+                    <table className="table table-striped table-light">
                         <thead>
                             <tr>
-                                <th className="">ID</th>
-                                <th className="">Name</th>
-                                <th className="">Biography</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Biography</th>
                             </tr>
                         </thead>
                         <tbody>
                             {profiles && 
                             profiles.map((profile, index) => (
                                 <tr key={index}>
-                                    <td className="">{profile.id}</td>
-                                    <td className="">{profile.name}</td>
-                                    <td className="">{profile.biography}</td>
+                                    <td scope="row">{profile.id}</td>
+                                    <td scope="row">{profile.name}</td>
+                                    <td scope="row">{profile.biography}</td>
                                 </tr>
                             ))}
                         </tbody>

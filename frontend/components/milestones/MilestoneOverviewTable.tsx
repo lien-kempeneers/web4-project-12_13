@@ -9,27 +9,27 @@ type Props = {
 const MilestoneOverviewTable : React.FC<Props> = ({milestones}:Props) => {
     return (
         <>
-            <div className="">
+            <div className="mx-5  shadow-lg shadow-inset p-3 mb-5 bg-white text-center mt-5">
                 {milestones && (
-                    <table className="">
+                    <table className="table table-striped table-light">
                         <thead>
                             <tr>
-                                <th className="">ID</th>
-                                <th className="">Title</th>
-                                <th className="">Description</th>
-                                <th className="">Deadline</th>
-                                <th className="">TaskID</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Deadline</th>
+                                <th scope="col">Task ID</th>
                             </tr>
                         </thead>
                         <tbody>
                             {milestones && 
                             milestones.map((milestone, index) => (
                                 <tr key={index}>
-                                    <td className="">{milestone.id}</td>
-                                    <td className="">{milestone.title}</td>
-                                    <td className="">{milestone.description}</td>
-                                    <td className="">{milestone.deadline.toString()}</td>
-                                    <td className="">{milestone.taskId}</td>
+                                    <td scope="row">{milestone.id}</td>
+                                    <td scope="row">{milestone.title}</td>
+                                    <td scope="row">{milestone.description}</td>
+                                    <td scope="row">{milestone.deadline.toString()}</td>
+                                    <td scope="row">{milestone.taskId}</td>
                                 </tr>
                             ))}
                         </tbody>

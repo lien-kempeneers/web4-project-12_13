@@ -1,32 +1,33 @@
 import React from "react";
 import { User } from "../../types";
 
+
 type Props = {
     users: Array<User>;
 };
 
 const UserOverviewTable : React.FC<Props> = ({users}:Props) => {
     return (
-        <>
-            <div className="">
+        <> 
+        <div className="mx-5  shadow-lg shadow-inset p-3 mb-5 bg-white text-center mt-5">
                 {users && (
-                    <table className="">
-                        <thead>
+                    <table className="table table-striped table-light">
+                        <thead className="thead-dark">
                             <tr>
-                                <th className="">Name</th>
-                                <th className="">Password</th>
-                                <th className="">Email</th>
-                                <th className="">ID</th>
+                                <th scope="col">User ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Password</th>
+                                <th scope="col">Email</th>
                             </tr>
                         </thead>
                         <tbody>
                             {users && 
                             users.map((user, index) => (
                                 <tr key={index}>
-                                    <td className="">{user.username}</td>
-                                    <td className="">{user.email}</td>
-                                    <td className="">{user.password}</td>
-                                    <td className="">{user.id}</td>
+                                    <td scope="row">{user.id}</td>
+                                    <td scope="row">{user.username}</td>
+                                    <td scope="row">{user.email}</td>
+                                    <td scope="row">{user.password}</td>
                                 </tr>
                             ))}
                         </tbody>

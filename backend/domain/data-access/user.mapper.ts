@@ -13,11 +13,13 @@ export const mapToUser = ({
     username,
     email,
     password,
+    id
 }: UserPrisma)
 : User =>
 new User({
     username,
     email,
-    password
+    password,
+    id
 }
 )
