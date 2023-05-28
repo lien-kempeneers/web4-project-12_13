@@ -12,7 +12,8 @@
 *              type: string
 *              description: The description of the milestone
 *            deadline:
-*              type: 2023-07-21T17:32:28Z
+*              type: string
+*              format: date-time
 *              description: The deadline of the milestone
 *            taskId:
 *              type: integer
