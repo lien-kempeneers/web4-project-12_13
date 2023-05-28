@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react"
-import MilestoneService from "../../service/MilestoneService"
 import Header from "../../components/Header"
-import { Milestone } from "../../types"
 import MilestoneOverviewTable from "../../components/milestones/MilestoneOverviewTable"
 import Head from "next/head"
 import { useRouter } from "next/router"
