@@ -31,7 +31,7 @@ useEffect(() => {
                 </ul>:""}
                 <ul className="navbar-nav ml-auto">
                     <li>
-                        <Link href="/signup" className="nav-link">Sign Up</Link>
+                    {isLogged?"":<Link href="/signup" className="nav-link">Sign Up</Link>}
                     </li>
                     <li>
                         {isLogged?<Link href="/logout" className="nav-link">Logout</Link>: <Link href="/login" className="nav-link">Login</Link>}

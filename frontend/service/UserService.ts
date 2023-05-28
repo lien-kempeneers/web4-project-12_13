@@ -1,3 +1,5 @@
+import LoginService from "./LoginService"
+
 const getAllUsers = () => {
     const token = sessionStorage.getItem("token")
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/', {
@@ -25,7 +27,7 @@ const getUser = () => {
 
 const createUser = (name:string, email:string, password: string) => {
     const token = sessionStorage.getItem("token")
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/signup', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -36,7 +38,10 @@ const createUser = (name:string, email:string, password: string) => {
                 password: password,
                 email: email
             })
-        })
+        }).then((response)=>{if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response.json()})
 }
 
 const updateUser = () => {

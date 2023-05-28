@@ -23,8 +23,7 @@ const AddUserForm : React.FC = () => {
         console.log(email, password);
         LoginService.logIn(email, password).then(
             (result)=>{
-            push("/users")
-        }
+        push("/users")}
         )
 
     }

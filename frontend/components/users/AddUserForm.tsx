@@ -4,6 +4,7 @@ import UserService from "@/service/UserService";
 import { json } from "stream/consumers";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react"
+import LoginService from "@/service/LoginService";
 
 
 
@@ -13,11 +14,17 @@ const AddUserForm : React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isEnable, setEnable] = useState(true);
+    const { push } = useRouter();
 
     function handleSubmit(event: FormEvent<HTMLFormElement>): void {
         event.preventDefault();
         console.log(email, password);
-        UserService.createUser(name, email, password);
+        UserService.createUser(name, email, password).then((result)=>{
+            LoginService.logIn(email, password).then(
+                (result)=>{
+            push("/users")})
+        }
+        )
     }
 
     return (

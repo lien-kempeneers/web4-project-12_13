@@ -47,7 +47,7 @@ dotenv.config();
 var { expressjwt: expressjwt } = require("express-jwt");
 const jwtSecret = process.env.JWT_SECRET;
 
-app.use( expressjwt({ secret: jwtSecret, algorithms: ['HS256'] }).unless({ path: ["/^/api-docs(/.*)?$/", "/user/login", "/user/add", "/status"] }));
+app.use( expressjwt({ secret: jwtSecret, algorithms: ['HS256'] }).unless({ path: ["/^/api-docs(/.*)?$/", "/user/login", "/user/signup", "/status"] }));
 
 
 app.use(bodyParser.json());
