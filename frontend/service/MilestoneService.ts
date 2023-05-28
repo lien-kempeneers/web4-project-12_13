@@ -57,9 +57,9 @@ const updateMilestone = () => {
         })
 }
 
-const deleteMilestone = () => {
+const deleteMilestone = (id:number) => {
     const token = sessionStorage.getItem("token")
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/milestone/{id}', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+`/milestone/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

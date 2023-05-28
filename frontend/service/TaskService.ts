@@ -58,9 +58,9 @@ const updateTask = () => {
     })
 }
 
-const deleteTask = () => {
+const deleteTask = (id:number) => {
     const token = sessionStorage.getItem("token")
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/task/{id}', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+`/task/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

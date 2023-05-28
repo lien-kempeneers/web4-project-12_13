@@ -52,9 +52,9 @@ const updateProfile = () => {
     })
 }
 
-const deleteProfile = () => {
+const deleteProfile = (id:number) => {
     const token = sessionStorage.getItem("token")
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/profile/{id}', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+`/profile/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

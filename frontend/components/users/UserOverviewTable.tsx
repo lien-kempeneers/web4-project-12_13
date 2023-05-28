@@ -10,28 +10,28 @@ import { useEffect, useState } from "react"
 
 const UserOverviewTable : React.FC = () => {
     
-const [users, setUsers] = useState<Array<User>>([])
+    const [users, setUsers] = useState<Array<User>>([])
 
 
-const getUsers = async () => {
-    UserService.getAllUsers()
-        .then((res) => res.json())
-        .then((users) => setUsers(users)) 
-}
+    const getUsers = async () => {
+        UserService.getAllUsers()
+            .then((res) => res.json())
+            .then((users) => setUsers(users)) 
+    }
 
-useEffect(() => {
-    getUsers()
-}, [])
+    useEffect(() => {
+        getUsers()
+    }, [])
 
-const handleDelete = (id: number) => {
-    console.log(id)
-    UserService.deleteUser(id)
-    .then((res) => {
-        if(res.status === 200){
-            Router.reload()
-        }
-    })
-}
+    const handleDelete = (id: number) => {
+        console.log(id)
+        UserService.deleteUser(id)
+        .then((res) => {
+            if(res.status === 200){
+                Router.reload()
+            }
+        })
+    }
 
 
     return (
