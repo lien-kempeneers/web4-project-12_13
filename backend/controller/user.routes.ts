@@ -111,6 +111,15 @@ userRouter.get('/:id', async (req: Request, res: Response) => {
     }
 });
 
+userRouter.get('/:email', async (req: Request, res: Response) => {
+    try{
+        const user = await userService.getUserByEmail(req.params.email);
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(500).json({status: 'error', message: err.message});
+    }
+});
+
 userRouter.post('/', async  (req: Request, res: Response) => {
     const userInput = req.body;
     try{

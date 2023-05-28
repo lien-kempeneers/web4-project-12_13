@@ -7,11 +7,19 @@ const getAllUsers = async (): Promise<User[]> => {
     return await UserDB.getAllUsers();
 }
 
-const getUser = async (email): Promise<User> => {
+const getUser = async (id): Promise<User> => {
+    if(!id || id == ""){
+        throw new Error('Email is invalid');
+    }
+    return await UserDB.getUser({id});
+}
+
+
+const getUserByEmail = async (email): Promise<User> => {
     if(!email || email == ""){
         throw new Error('Email is invalid');
     }
-    return await UserDB.getUser({email});
+    return await UserDB.getUserByEmail({email});
 }
 
 
@@ -92,7 +100,7 @@ const bcrypt = require('bcrypt');
 
 const authenticate = async ({ email, password}: User): Promise<string> => {
     console.log(email, password);
-    const user = await getUser(email);
+    const user = await getUserByEmail(email);
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
         throw new Error('Invalid password');
@@ -104,6 +112,7 @@ const authenticate = async ({ email, password}: User): Promise<string> => {
 export default {
     getAllUsers,
     getUser,
+    getUserByEmail,
     createUser,
     updateUser,
     deleteUser,
