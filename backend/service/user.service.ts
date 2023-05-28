@@ -9,13 +9,14 @@ const getAllUsers = async (): Promise<User[]> => {
 
 const getUser = async (id): Promise<User> => {
     if(!id || id == ""){
-        throw new Error('Email is invalid');
+        throw new Error('id is invalid');
     }
     return await UserDB.getUser({id});
 }
 
 
 const getUserByEmail = async (email): Promise<User> => {
+    console.log(email);
     if(!email || email == ""){
         throw new Error('Email is invalid');
     }

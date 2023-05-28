@@ -87,6 +87,41 @@
 *      responses:
 *        200:
 *          description: Succesfully deleted a user
+* /user/byemail/{email}:
+*    get:
+*      description: Get a specific user from the database with unique email address
+*      summary: Get a user
+*      responses:
+*        200:
+*          description: Succesfully retrieved a user
+*          content:
+*            application/json:
+*              schema:
+*                $ref: '#/components/schemas/User'
+*      parameters:
+*        - name: email
+*          in: path
+*          required: true
+*          schema:
+*            type: string
+* /user/login:
+*    post:
+*      description: Log in a user
+*      summary: Log in a user
+*      requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             type: object
+*             properties:
+*               email:
+*                 type: string
+*               password:
+*                 type: string
+*      responses:
+*        200:
+*          description: Succesfully logged in a user
 */
 
 import { User } from '@prisma/client';
@@ -114,8 +149,9 @@ userRouter.get('/:id', async (req: Request, res: Response) => {
     }
 });
 
-userRouter.get('/:email', async (req: Request, res: Response) => {
+userRouter.get('/byemail/:email', async (req: Request, res: Response) => {
     try{
+        console.log(req.params.email);
         const user = await userService.getUserByEmail(req.params.email);
         res.status(200).json(user);
     } catch (err) {
