@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import MilestoneService from "../../service/MilestoneService"
 import Header from "../../components/Header"
 import { Milestone } from "../../types"
-import LoginForm from "../../components/users/LoginForm"
+import AddUserForm from "../../components/users/AddUserForm"
 import Head from "next/head"
 
 
@@ -17,7 +17,7 @@ const Milestones : React.FC = () => {
             </Head>
             <Header></Header>
             <main> 
-                <LoginForm></LoginForm>
+                <AddUserForm></AddUserForm>
             </main>
         </>
     )

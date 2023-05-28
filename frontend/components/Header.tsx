@@ -24,7 +24,7 @@ const Header : React.FC = () => {
                 </ul>
                 <ul className="navbar-nav ml-auto">
                     <li>
-                        <Link href="/" className="nav-link">Sign Up</Link>
+                        <Link href="/signup" className="nav-link">Sign Up</Link>
                     </li>
                     <li>
                         <Link href="/login" className="nav-link">Login</Link>

@@ -3,28 +3,21 @@ import { User } from "../../types";
 import UserService from "@/service/UserService";
 import { json } from "stream/consumers";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react"
 
-
-const router = useRouter();
 
 
 const AddUserForm : React.FC = () => {
 
-
-    function setPassword(value: string): void {
-        //throw new Error("Function not implemented.");
-    }
-
-    function setEmail(value: string): void {
-        //throw new Error("Function not implemented.");
-    }
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isEnable, setEnable] = useState(true);
 
     function handleSubmit(event: FormEvent<HTMLFormElement>): void {
-        //throw new Error("Function not implemented.");
-    }
-
-    function setName(value: string): void {
-        //throw new Error("Function not implemented.");
+        event.preventDefault();
+        console.log(email, password);
+        UserService.createUser(name, email, password);
     }
 
     return (
@@ -36,7 +29,7 @@ const AddUserForm : React.FC = () => {
             <input 
                 id="name"
                 type="text"
-                value={"username"}
+                placeholder={"username"}
                 onChange={(event) => setName(event.target.value)}
             />
             <div className="">
@@ -45,7 +38,7 @@ const AddUserForm : React.FC = () => {
             <input
                 id="email"
                 type="text"
-                value={"email"}
+                placeholder={"email"}
                 onChange={(event) => setEmail(event.target.value)}
             />
             <div className="">
@@ -53,8 +46,8 @@ const AddUserForm : React.FC = () => {
             </div>
             <input
                 id="password"
-                type="text"
-                value={"password"}
+                type="password"
+                placeholder={"password"}
                 onChange={(event) => setPassword(event.target.value)}
                 />
             <div className="">

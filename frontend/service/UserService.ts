@@ -16,16 +16,16 @@ const getUser = () => {
     })
 }
 
-const createUser = () => {
+const createUser = (name:string, email:string, password: string) => {
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: 'username',
-                password: 'password',
-                email: 'email'
+                username: name,
+                password: password,
+                email: email
             })
         })
 }
