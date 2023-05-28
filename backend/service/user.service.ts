@@ -99,7 +99,7 @@ const generateJwtToken = (email: string): string => {
 const bcrypt = require('bcrypt');
 
 
-const authenticate = async ({ email, password}: User): Promise<string> => {
+const authenticate = async ({ email, password}: User) => {
     console.log(email, password);
     const user = await getUserByEmail(email);
     const isValidPassword = await bcrypt.compare(password, user.password);
@@ -107,7 +107,8 @@ const authenticate = async ({ email, password}: User): Promise<string> => {
         throw new Error('Invalid password');
     }
     console.log("authorised")
-    return generateJwtToken(user.email);
+    
+    return {token: generateJwtToken(user.email), username: user.username};
 };
 
 export default {

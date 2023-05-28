@@ -4,8 +4,10 @@ import { useEffect, useState } from "react"
 
 const Header : React.FC = () => {
     const [isLogged, setIsLogged] = useState(false);
+    const [userName, setUserName] = useState("");
 useEffect(() => {
     setIsLogged(!!sessionStorage.getItem("token"));
+    setUserName(sessionStorage.getItem("username")||"");
 }, []);
     return (
     <>
@@ -29,7 +31,7 @@ useEffect(() => {
                 </ul>:""}
                 <ul className="navbar-nav ml-auto">
                     <li>
-                    {isLogged?"":<Link href="/signup" className="nav-link">Sign Up</Link>}
+                    {isLogged?<p>{"Welcome "+userName}</p>:<Link href="/signup" className="nav-link">Sign Up</Link>}
                     </li>
                     <li>
                         {isLogged?<Link href="/logout" className="nav-link">Logout</Link>: <Link href="/login" className="nav-link">Login</Link>}

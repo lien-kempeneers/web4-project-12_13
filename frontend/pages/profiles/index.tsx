@@ -10,17 +10,10 @@ import { useRouter } from "next/router"
 const Profiles : React.FC = () => {
     const { push } = useRouter();
 
-    const [profiles, setProfile] = useState<Array<Profile>>([])
-
-    const getProfiles = async () => {
-        ProfileService.getAllProfiles()
-            .then((res) => res.json())
-            .then((profiles) => setProfile(profiles)) 
-    }
 
     useEffect(() => {
         if(!!sessionStorage.getItem("token")){
-        getProfiles()}
+        }
         else{
             push("/login")
         }
@@ -33,7 +26,7 @@ const Profiles : React.FC = () => {
             </Head>
             <Header></Header>
             <main> 
-                <ProfileOverviewTable profiles={profiles}></ProfileOverviewTable>
+                <ProfileOverviewTable ></ProfileOverviewTable>
             </main>
         </>
     )

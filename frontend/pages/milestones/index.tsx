@@ -10,19 +10,12 @@ import { useRouter } from "next/router"
 const Milestones : React.FC = () => {
     //const users = [{"username":"test","password":"test"},{"username":"test2","password":"test2"}]
 
-    const [milestones, setMilestone] = useState<Array<Milestone>>([])
     const { push } = useRouter();
 
 
-    const getMilestone = async () => {
-        MilestoneService.getAllMilestones().
-            then((jsonmilestones) => jsonmilestones.json()).
-                then((arraymilestones) => setMilestone(arraymilestones)) 
-    }
 
     useEffect(() => {
-        if(!!sessionStorage.getItem("token")){
-        getMilestone()}
+        if(!!sessionStorage.getItem("token")){}
         else{
             push('/login');
         }
@@ -36,7 +29,7 @@ const Milestones : React.FC = () => {
             </Head>
             <Header></Header>
             <main> 
-                <MilestoneOverviewTable milestones={milestones}></MilestoneOverviewTable>
+                <MilestoneOverviewTable></MilestoneOverviewTable>
             </main>
         </>
     )
