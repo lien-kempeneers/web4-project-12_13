@@ -13,8 +13,8 @@ const Profiles : React.FC = () => {
 
     useEffect(() => {
         if(!!sessionStorage.getItem("token")){
-        }
-        else{
+
+        } else {
             push("/login")
         }
     }, [])

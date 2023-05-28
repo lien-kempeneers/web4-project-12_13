@@ -2,7 +2,7 @@ import React from "react";
 import { User } from "../../types";
 import UserService from "@/service/UserService";
 import Link from "next/link";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { useEffect, useState } from "react"
 
 
@@ -32,6 +32,14 @@ const UserOverviewTable : React.FC = () => {
             }
         })
     }
+    
+    const handleEdit = (id: number) => {
+        console.log(id)
+        Router.push({
+            pathname: 'users/editUser/',
+            query: { id: id },
+        })
+    }
 
 
     return (
@@ -58,7 +66,7 @@ const UserOverviewTable : React.FC = () => {
                                     <td scope="row">{user.password}</td>
                                     <td scope="row">{user.email}</td>
                                     <td>
-                                        <Link href="/edit" className="btn">Edit</Link>
+                                        <button onClick={() => handleEdit(user.id)} className="btn">Edit</button>
                                     </td>
                                     <td>
                                         <button onClick={() => handleDelete(user.id)} className="btn">Delete</button>

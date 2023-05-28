@@ -11,17 +11,14 @@ const getAllUsers = () => {
     })
 }
 
-const getUser = () => {
+const getUser = (id:number) => {
     const token = sessionStorage.getItem("token")
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/{id}', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+`/user/${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`
             },
-            body: JSON.stringify({
-                id: 'id'
-            })
     })
 }
 
@@ -58,18 +55,18 @@ const createUser = (name:string, email:string, password: string) => {
         return response.json()})
 }
 
-const updateUser = () => {
+const updateUser = (id: number, username:string, password:string, email:string) => {
     const token = sessionStorage.getItem("token")
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/{id}', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+`/user/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
-                username: 'username',
-                password: 'password',
-                email: 'email'
+                username: username,
+                password: password,
+                email: email
             })
     })
 }

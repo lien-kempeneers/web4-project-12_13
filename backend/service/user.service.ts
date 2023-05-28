@@ -66,10 +66,11 @@ const updateUser = async (id,{username, email, password}:User): Promise<User> =>
     if(password.length == 0){
         throw new Error('Password can\'t be empty');
     }
+    const hashedPassword = await bcrypt.hash(password, 12);
     return await UserDB.updateUser(id,{
         username:username,
         email:email,
-        password:password
+        password:hashedPassword
     })
 };
 
