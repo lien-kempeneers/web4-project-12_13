@@ -16,7 +16,7 @@ const getUser = async (id): Promise<User> => {
 
 
 const getUserByEmail = async (email): Promise<User> => {
-    console.log(email);
+
     if(!email || email == ""){
         throw new Error('Email is invalid');
     }
@@ -92,7 +92,7 @@ const generateJwtToken = (email: string): string => {
     try{
         return jwt.sign({ email }, jwtSecret, options);
     } catch (err) {
-        console.log(err.toString());
+
         throw new Error('Error while generating JWT token');
     }
 };
@@ -101,14 +101,14 @@ const bcrypt = require('bcrypt');
 
 
 const authenticate = async ({ email, password}: User) => {
-    console.log(email, password);
+
     const user = await getUserByEmail(email);
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
         throw new Error('Invalid password');
     }
-    console.log("authorised")
-    
+
+
     return {token: generateJwtToken(user.email), username: user.username};
 };
 

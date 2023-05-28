@@ -17,14 +17,15 @@ const EditUserForm : React.FC = () => {
     console.log(router.query);
 
     const getUser = async () => {
-        UserService.getUser(id)
+        const userId = parseInt(router.query.id as string);
+        setId(userId)
+        UserService.getUser(userId)
             .then((res) => res.json())
             .then((user) => {setName(user.username); setEmail(user.email) })
     }
 
     useEffect(() => {
         if(!!sessionStorage.getItem("token")){
-            setId(parseInt(router.query.id as string))
             getUser();
         }else{
             push('/login');

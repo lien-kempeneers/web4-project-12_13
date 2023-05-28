@@ -21,7 +21,7 @@ const ProfileOverviewTable : React.FC = () => {
     }, [])
     
     const handleDelete = (id: number) => {
-        console.log(id)
+
         ProfileService.deleteProfile(id)
         .then((res) => {
             if(res.status === 200){

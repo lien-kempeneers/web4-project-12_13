@@ -21,7 +21,7 @@ const TaskOverviewTable : React.FC = () => {
     }, [])
 
     const handleDelete = (id: number) => {
-        console.log(id)
+
         TaskService.deleteTask(id)
         .then((res) => {
             if(res.status === 200){

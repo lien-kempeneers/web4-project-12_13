@@ -22,7 +22,7 @@ const MilestoneOverviewTable : React.FC = () => {
     }, [])
 
     const handleDelete = (id: number) => {
-        console.log(id)
+
         MilestoneService.deleteMilestone(id)
         .then((res) => {
             if(res.status === 200){

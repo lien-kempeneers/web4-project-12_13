@@ -13,7 +13,6 @@ const logIn = (email: string, password: string) => {
             return Error(response.statusText);
         }
         const json = await response.json()
-        console.log(json)
         sessionStorage.setItem('token', json.data.token);
         sessionStorage.setItem("username",json.data.username)
     })
