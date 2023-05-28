@@ -4,9 +4,11 @@ import Header from "../../components/Header"
 import { Profile } from "../../types"
 import ProfileOverviewTable from "../../components/profiles/ProfileOverviewTable"
 import Head from "next/head"
+import { useRouter } from "next/router"
 
 
 const Profiles : React.FC = () => {
+    const { push } = useRouter();
 
     const [profiles, setProfile] = useState<Array<Profile>>([])
 
@@ -17,7 +19,11 @@ const Profiles : React.FC = () => {
     }
 
     useEffect(() => {
-        getProfiles()
+        if(!!sessionStorage.getItem("token")){
+        getProfiles()}
+        else{
+            push("/login")
+        }
     }, [])
 
     return (

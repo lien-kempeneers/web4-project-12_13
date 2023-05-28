@@ -7,11 +7,13 @@ import { User } from "../../types"
 import Head from "next/head"
 import Link from "next/link"
 import "../../node_modules/bootstrap/scss/bootstrap.scss";
+import { useRouter } from "next/router"
 
 
 const Users : React.FC = () => {
 
     const [users, setUsers] = useState<Array<User>>([])
+    const { push } = useRouter();
 
     const getUsers = async () => {
         UserService.getAllUsers()
@@ -20,8 +22,12 @@ const Users : React.FC = () => {
     }
 
     useEffect(() => {
-        console.log("test")
-        getUsers()
+        if(!!sessionStorage.getItem("token")){
+            getUsers()}
+            else{
+                push("/login")
+            }
+        
     }, [])
 
     return (

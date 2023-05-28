@@ -1,14 +1,20 @@
 import Link from "next/link"
 import "../node_modules/bootstrap/scss/bootstrap.scss";
+import { useEffect, useState } from "react"
 
 const Header : React.FC = () => {
+    const [isLogged, setIsLogged] = useState(false);
+useEffect(() => {
+    setIsLogged(!!sessionStorage.getItem("token"));
+}, []);
     return (
         <>
 <header>
     <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div className="container-fluid">
-                <a className="navbar-brand" href="/">Task App</a>        
+                <a className="navbar-brand" href="/">Task App</a>{isLogged?
+                      
                 <ul className="navbar-nav mr-auto">
                     <li>
                         <Link href="/users" className="nav-link">Users</Link>
@@ -22,13 +28,13 @@ const Header : React.FC = () => {
                     <li>
                         <Link href="/profiles" className="nav-link">Profiles</Link>
                     </li>
-                </ul>
+                </ul>:""}
                 <ul className="navbar-nav ml-auto">
                     <li>
                         <Link href="/signup" className="nav-link">Sign Up</Link>
                     </li>
                     <li>
-                        <Link href="/login" className="nav-link">Login</Link>
+                        {isLogged?<Link href="/logout" className="nav-link">Logout</Link>: <Link href="/login" className="nav-link">Login</Link>}
                     </li>
                 </ul>
             </div>
