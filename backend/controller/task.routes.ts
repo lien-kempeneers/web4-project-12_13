@@ -29,6 +29,8 @@
 *      responses:
 *        200:
 *          description: Succesfully received a list of all the tasks
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 *    post:
 *      description: Add a task to the database 
 *      summary: Create a task
@@ -44,6 +46,8 @@
 *      responses:
 *        200:
 *          description: Succesfully added a task
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 * /task/{id}:
 *    get:
 *      description: Get a specific task from the database
@@ -57,6 +61,8 @@
 *            application/json:
 *              schema:
 *                $ref: '#/components/schemas/Task'
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 *      parameters:
 *        - name: id
 *          in: path
@@ -84,6 +90,8 @@
 *      responses:
 *        200:
 *          description: Succesfully updated a task
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 *    delete:
 *      summary: Delete a task
 *      tags:
@@ -99,6 +107,8 @@
 *      responses:
 *        200:
 *          description: Succesfully deleted a task
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 */
 
 import taskService from '../service/task.service';

@@ -27,6 +27,8 @@
 *      responses:
 *        200:
 *          description: Succesfully received a list of all the users
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 *    post:
 *      description: Add a user to the database 
 *      summary: Create a user
@@ -42,6 +44,8 @@
 *      responses:
 *        200:
 *          description: Succesfully added a user
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 * /user/{id}:
 *    get:
 *      description: Get a specific user from the database
@@ -82,6 +86,8 @@
 *      responses:
 *        200:
 *          description: Succesfully updated a user
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 *    delete:
 *      summary: Delete a user
 *      description: Delete a specific user from the database
@@ -97,6 +103,8 @@
 *      responses:
 *        200:
 *          description: Succesfully deleted a user
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 * /user/byemail/{email}:
 *    get:
 *      description: Get a specific user from the database with unique email address
@@ -110,6 +118,8 @@
 *            application/json:
 *              schema:
 *                $ref: '#/components/schemas/User'
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 *      parameters:
 *        - name: email
 *          in: path
@@ -136,6 +146,8 @@
 *      responses:
 *        200:
 *          description: Succesfully logged in a user
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 */
 
 import { User } from '@prisma/client';

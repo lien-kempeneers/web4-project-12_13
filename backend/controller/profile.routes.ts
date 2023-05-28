@@ -22,6 +22,8 @@
 *      responses:
 *        200:
 *          description: Succesfully received a list of all the profiles
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 *    post:
 *      description: Add a profile to the database 
 *      summary: Create a profile
@@ -37,6 +39,8 @@
 *      responses:
 *        200:
 *          description: Succesfully added a profile
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 * /profile/{id}:
 *    get:
 *      description: Get a specific profile from the database
@@ -50,6 +54,8 @@
 *            application/json:
 *              schema:
 *                $ref: '#/components/schemas/profile'
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 *      parameters:
 *        - name: id
 *          in: path
@@ -77,6 +83,8 @@
 *      responses:
 *        200:
 *          description: Succesfully updated a profile
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 *    delete:
 *      summary: Delete a profile
 *      description: Delete a specific profile from the database
@@ -92,6 +100,8 @@
 *      responses:
 *        200:
 *          description: Succesfully deleted a profile
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 */
 import profileService from '../service/profile.service';
 import express, {Request, Response} from 'express';

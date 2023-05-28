@@ -31,6 +31,8 @@
 *      responses:
 *        200:
 *          description: Succesfully received a list of all the milestones
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 *    post:
 *      description: Add a milestone to the database 
 *      summary: Create a milestone
@@ -46,6 +48,8 @@
 *      responses:
 *        200:
 *          description: Succesfully added a milestone
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 * /milestone/{id}:
 *    get:
 *      description: Get a specific milestone from the database
@@ -59,6 +63,8 @@
 *            application/json:
 *              schema:
 *                $ref: '#/components/schemas/Milestone'
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 *      parameters:
 *        - name: id
 *          in: path
@@ -86,6 +92,8 @@
 *      responses:
 *        200:
 *          description: Succesfully updated a milestone
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 *    delete:
 *      summary: Delete a milestone
 *      description: Delete a specific milestone from the database
@@ -101,6 +109,8 @@
 *      responses:
 *        200:
 *          description: Succesfully deleted a milestone
+*        401:
+*          description: Unauthorized, please provide a valid JWT token
 */
 
 import { Milestone } from '@prisma/client';
