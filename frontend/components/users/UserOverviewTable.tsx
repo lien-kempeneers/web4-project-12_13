@@ -26,8 +26,8 @@ const UserOverviewTable : React.FC<Props> = ({users}:Props) => {
                                 <tr key={index}>
                                     <td scope="row">{user.id}</td>
                                     <td scope="row">{user.username}</td>
-                                    <td scope="row">{user.email}</td>
                                     <td scope="row">{user.password}</td>
+                                    <td scope="row">{user.email}</td>
                                 </tr>
                             ))}
                         </tbody>
