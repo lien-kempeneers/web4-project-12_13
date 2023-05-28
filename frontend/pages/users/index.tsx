@@ -12,18 +12,12 @@ import { useRouter } from "next/router"
 
 const Users : React.FC = () => {
 
-    const [users, setUsers] = useState<Array<User>>([])
     const { push } = useRouter();
 
-    const getUsers = async () => {
-        UserService.getAllUsers()
-            .then((res) => res.json())
-            .then((users) => setUsers(users)) 
-    }
 
     useEffect(() => {
         if(!!sessionStorage.getItem("token")){
-            getUsers()}
+            }
             else{
                 push("/login")
             }
@@ -36,7 +30,7 @@ const Users : React.FC = () => {
                 <title>Users</title>
             </Head>
                 <Header></Header>
-                <UserOverviewTable users={users}/>
+                <UserOverviewTable />
         </>
     )
 }

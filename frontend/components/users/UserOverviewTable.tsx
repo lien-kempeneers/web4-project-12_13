@@ -3,10 +3,25 @@ import { User } from "../../types";
 import UserService from "@/service/UserService";
 import Link from "next/link";
 import Router from "next/router";
+import { useEffect, useState } from "react"
 
-type Props = {
-    users: Array<User>;
-};
+
+
+
+const UserOverviewTable : React.FC = () => {
+    
+const [users, setUsers] = useState<Array<User>>([])
+
+
+const getUsers = async () => {
+    UserService.getAllUsers()
+        .then((res) => res.json())
+        .then((users) => setUsers(users)) 
+}
+
+useEffect(() => {
+    getUsers()
+}, [])
 
 const handleDelete = (id: number) => {
     console.log(id)
@@ -19,8 +34,6 @@ const handleDelete = (id: number) => {
 }
 
 
-const UserOverviewTable : React.FC<Props> = ({users}:Props) => {
-    
     return (
         <> 
         <div className="mx-5  shadow-lg shadow-inset p-3 mb-5 bg-white text-center mt-5">
