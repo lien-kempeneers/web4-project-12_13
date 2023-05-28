@@ -12,7 +12,7 @@
 *              type: string
 *              description: The description of the task
 *            deadline:
-*              type: string
+*              type: 2023-07-21T17:32:28Z
 *              description: The deadline of the task
 *            userId:
 *              type: integer
