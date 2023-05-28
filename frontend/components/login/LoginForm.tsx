@@ -4,6 +4,8 @@ import UserService from "@/service/UserService";
 import { json } from "stream/consumers";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react"
+import LoginService from "../../service/LoginService"
+
 
 
 
@@ -18,6 +20,7 @@ const AddUserForm : React.FC = () => {
     function handleSubmit(event: FormEvent<HTMLFormElement>): void {
         event.preventDefault();
         console.log(username, password);
+        LoginService.logIn(username, password);
         //TODO handle login + store in session storage
         //throw new Error("Function not implemented.");
     }
