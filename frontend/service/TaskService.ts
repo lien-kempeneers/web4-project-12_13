@@ -1,14 +1,21 @@
 const getAllTasks = () => {
+    const token = sessionStorage.getItem("token")
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/task/', {
-        method: 'GET'
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
     })
 }
 
 const getTask = () => {
+    const token = sessionStorage.getItem("token")
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/task/{id}', {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        
             },
             body: JSON.stringify({
                 id: 'id'
@@ -17,10 +24,13 @@ const getTask = () => {
 }
 
 const createTask = () => {
+    const token = sessionStorage.getItem("token")
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/task/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
+            ,
+            Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
                 title: 'title',
@@ -32,10 +42,12 @@ const createTask = () => {
 }
 
 const updateTask = () => {
+    const token = sessionStorage.getItem("token")
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/task/{id}', {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
                 title: 'title',
@@ -47,10 +59,12 @@ const updateTask = () => {
 }
 
 const deleteTask = () => {
+    const token = sessionStorage.getItem("token")
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/task/{id}', {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
                 id: 'id'

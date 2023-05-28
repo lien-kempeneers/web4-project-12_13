@@ -42,7 +42,14 @@ const swaggerSpec = swaggerJSDoc(swaggerOpts);
 app.use(cors({
   origin: '*'
 }));
+
 dotenv.config();
+var { expressjwt: expressjwt } = require("express-jwt");
+const jwtSecret = process.env.JWT_SECRET;
+
+app.use( expressjwt({ secret: jwtSecret, algorithms: ['HS256'] }).unless({ path: ["/^/api-docs(/.*)?$/", "/user/login", "/user/add", "/status"] }));
+
+
 app.use(bodyParser.json());
 app.use('/profile', profileRouter)
 app.use('/user', userRouter)
@@ -62,13 +69,6 @@ app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
     next();
   }
 }); */
-
-var { expressjwt: expressjwt } = require("express-jwt");
-const jwtSecret = process.env.JWT_SECRET;
-
-
-
-app.use( expressjwt({ secret: jwtSecret, algorithms: ['HS256'] }).unless({ path: ["/^/api-docs(/.*)?$/", "/user/login", "/user/add", "/status"] }));
 
 app.listen(port || 3000, () => {
   console.log(`Back-end is running on port ${port}.`);

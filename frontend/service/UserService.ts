@@ -1,14 +1,21 @@
 const getAllUsers = () => {
+    const token = sessionStorage.getItem("token")
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/', {
-        method: 'GET'
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
     })
 }
 
 const getUser = () => {
+    const token = sessionStorage.getItem("token")
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/{id}', {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
                 id: 'id'
@@ -17,10 +24,12 @@ const getUser = () => {
 }
 
 const createUser = (name:string, email:string, password: string) => {
+    const token = sessionStorage.getItem("token")
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
                 username: name,
@@ -31,10 +40,12 @@ const createUser = (name:string, email:string, password: string) => {
 }
 
 const updateUser = () => {
+    const token = sessionStorage.getItem("token")
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/{id}', {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
                 username: 'username',
@@ -45,10 +56,12 @@ const updateUser = () => {
 }
 
 const deleteUser = () => {
+    const token = sessionStorage.getItem("token")
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/{id}', {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
                 id: 'id'

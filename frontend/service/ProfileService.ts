@@ -1,14 +1,20 @@
 const getAllProfiles = () => {
+    const token = sessionStorage.getItem("token")
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/profile/', {
-        method: 'GET'
+        method: 'GET', headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
     })
 }
 
 const getProfile = () => {
+    const token = sessionStorage.getItem("token")
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/profile/{id}', {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
                 id: 'id'
@@ -17,10 +23,12 @@ const getProfile = () => {
 }
 
 const createProfile = () => {
+    const token = sessionStorage.getItem("token")
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/profile/', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
                 name: 'name',
@@ -30,10 +38,12 @@ const createProfile = () => {
 }
 
 const updateProfile = () => {
+    const token = sessionStorage.getItem("token")
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/profile/{id}', {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
                 name: 'name',
@@ -43,10 +53,12 @@ const updateProfile = () => {
 }
 
 const deleteProfile = () => {
+    const token = sessionStorage.getItem("token")
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/profile/{id}', {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
                 id: 'id'
