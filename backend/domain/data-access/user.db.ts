@@ -15,9 +15,9 @@ const getAllUsers = async (): Promise<User[]> => {
     }
 }
 
-const getUser = async ({id}): Promise<User> => {
+const getUser = async ({email}): Promise<User> => {
     try{
-        const userPrisma = await prisma.user.findUnique({where:{id:parseInt(id)}})
+        const userPrisma = await prisma.user.findUnique({where:{email:email}})
         return mapToUser(userPrisma);
     } catch (error) {
         console.error(error);

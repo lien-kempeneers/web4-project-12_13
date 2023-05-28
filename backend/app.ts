@@ -10,7 +10,7 @@ import { taskRouter } from './controller/task.routes';
 import { milestoneRouter } from './controller/milestone.routes';
 
 const app = express();
-dotenv.config();
+
 const port = process.env.APP_PORT || 3000;
 
 const swaggerOpts = {
@@ -39,7 +39,10 @@ const swaggerOpts = {
 };
 const swaggerSpec = swaggerJSDoc(swaggerOpts);
 
-app.use(cors());
+app.use(cors({
+  origin: '*'
+}));
+dotenv.config();
 app.use(bodyParser.json());
 app.use('/profile', profileRouter)
 app.use('/user', userRouter)

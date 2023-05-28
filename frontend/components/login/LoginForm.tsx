@@ -10,7 +10,7 @@ import LoginService from "../../service/LoginService"
 
 
 const AddUserForm : React.FC = () => {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isEnable, setEnable] = useState(true);
 
@@ -19,8 +19,8 @@ const AddUserForm : React.FC = () => {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>): void {
         event.preventDefault();
-        console.log(username, password);
-        LoginService.logIn(username, password);
+        console.log(email, password);
+        LoginService.logIn(email, password);
     }
 
 
@@ -28,13 +28,13 @@ const AddUserForm : React.FC = () => {
         <>
         <form onSubmit={handleSubmit}>
             <div className="">
-                <label htmlFor="name">Username:</label>
+                <label htmlFor="name">Email:</label>
             </div>
             <input
                 id="username"
                 type="text"
                 placeholder={"email"}
-                onChange={(event) => setUsername(event.target.value)}
+                onChange={(event) => setEmail(event.target.value)}
             />
             <div className="">
                 <label htmlFor="name">Password:</label>

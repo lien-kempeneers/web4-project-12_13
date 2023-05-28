@@ -7,11 +7,11 @@ const getAllUsers = async (): Promise<User[]> => {
     return await UserDB.getAllUsers();
 }
 
-const getUser = async (id): Promise<User> => {
-    if(!id || Number.isNaN(Number(id))){
-        throw new Error('Id is invalid');
+const getUser = async (email): Promise<User> => {
+    if(!email || email == ""){
+        throw new Error('Email is invalid');
     }
-    return await UserDB.getUser({id});
+    return await UserDB.getUser({email});
 }
 
 
@@ -34,7 +34,7 @@ const createUser = async (userInput:User): Promise<User> => {
     return await UserDB.createUser({
         username:userInput.username,
         email:userInput.email,
-        password:userInput.password
+        password:hashedPassword
     })
 };
 
@@ -76,13 +76,13 @@ const deleteUser = async (id): Promise<User> => {
 
 const jwtSecret = process.env.JWT_SECRET;
 
-const generateJwtToken = (username: string): string => {
+const generateJwtToken = (email: string): string => {
     const options = { expiresIn: `${process.env.JWT_EXPIRATION_TIME}h`, issuer: '' };
 
     try{
-        return jwt.sign({ username }, jwtSecret, options);
+        return jwt.sign({ email }, jwtSecret, options);
     } catch (err) {
-        console.log(error);
+        console.log(err.toString());
         throw new Error('Error while generating JWT token');
     }
 };
@@ -90,13 +90,15 @@ const generateJwtToken = (username: string): string => {
 const bcrypt = require('bcrypt');
 
 
-const authenticate = async ({ id, password}: User): Promise<string> => {
-    const user = await getUser({id});
+const authenticate = async ({ email, password}: User): Promise<string> => {
+    console.log(email, password);
+    const user = await getUser(email);
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
         throw new Error('Invalid password');
     }
-    return generateJwtToken(user.username);
+    console.log("authorised")
+    return generateJwtToken(user.email);
 };
 
 export default {
