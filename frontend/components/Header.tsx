@@ -5,9 +5,10 @@ const Header : React.FC = () => {
     return (
         <>
 <header>
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="/">Task App</a>
-        
+    <div className="container">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div className="container-fluid">
+                <a className="navbar-brand" href="/">Task App</a>        
                 <ul className="navbar-nav mr-auto">
                     <li>
                         <Link href="/users" className="nav-link">Users</Link>
@@ -30,7 +31,9 @@ const Header : React.FC = () => {
                         <Link href="/login" className="nav-link">Login</Link>
                     </li>
                 </ul>
-    </nav>
+            </div>
+        </nav>
+    </div>
 </header>
 </>
     )
