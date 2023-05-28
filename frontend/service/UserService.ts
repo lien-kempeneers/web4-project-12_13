@@ -60,16 +60,16 @@ const updateUser = () => {
     })
 }
 
-const deleteUser = () => {
+const deleteUser = (id: number) => {
     const token = sessionStorage.getItem("token")
-    return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/{id}', {
+    return fetch(process.env.NEXT_PUBLIC_API_URL + `/user/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
-                id: 'id'
+                email: 'email'
             })
     })
 }

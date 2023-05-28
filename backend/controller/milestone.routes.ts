@@ -23,6 +23,8 @@
 *    get:
 *      description: List all milestones that are in the database
 *      summary: List all milestones
+*      security:
+*        - bearerAuth: []
 *      responses:
 *        200:
 *          description: Succesfully received a list of all the milestones

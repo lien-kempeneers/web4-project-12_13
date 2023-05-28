@@ -20,6 +20,8 @@
 *    get:
 *      description: List all users that are in the database
 *      summary: List all users
+*      security:
+*        - bearerAuth: []
 *      responses:
 *        200:
 *          description: Succesfully received a list of all the users
@@ -91,6 +93,7 @@ import { User } from '@prisma/client';
 import userService from '../service/user.service';
 import express, {Request, Response} from 'express';
 
+
 const userRouter = require('express').Router();
 
 userRouter.get('/', async (req: Request, res: Response) => {
@@ -141,6 +144,7 @@ userRouter.put('/:id', async  (req: Request, res: Response) => {
 });
 
 userRouter.delete('/:id', async  (req: Request, res: Response) => {
+    console.log(req.params.id);
     try{
         const user = await userService.deleteUser(parseInt(req.params.id));
         res.status(200).json(user);

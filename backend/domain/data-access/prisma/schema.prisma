@@ -31,7 +31,7 @@ model Task {
   deadline    DateTime
   milestone   Milestone[]
   userId      Int
-  user        User        @relation(fields: [userId], references: [id])
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Milestone {
@@ -40,5 +40,5 @@ model Milestone {
   description String
   deadline    DateTime
   taskId      Int
-  task        Task     @relation(fields: [taskId], references: [id])
+  task        Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
 }
