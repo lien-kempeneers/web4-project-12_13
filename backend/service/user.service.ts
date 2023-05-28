@@ -16,10 +16,10 @@ const getUser = async (email): Promise<User> => {
 
 
 const createUser = async (userInput:User): Promise<User> => {
-    if(userInput.username.length == 0){
+    if(!userInput.username || userInput.username.length == 0){
         throw new Error('Username can\'t be empty');
     }
-    if(userInput.email.length == 0){
+    if(!userInput.email ||userInput.email.length == 0){
         throw new Error('Email can\'t be empty');
     }
     const existingUser = await UserDB.getUserByEmail({email:userInput.email});
