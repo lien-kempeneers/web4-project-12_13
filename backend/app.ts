@@ -47,7 +47,7 @@ dotenv.config();
 var { expressjwt: expressjwt } = require("express-jwt");
 const jwtSecret = process.env.JWT_SECRET;
 
-app.use( expressjwt({ secret: jwtSecret, algorithms: ['HS256'] }).unless({ path: ["/^/api-docs(/.*)?$/", "/user/login", "/user/signup", "/status"] }));
+app.use( expressjwt({ secret: jwtSecret, algorithms: ['HS256'] }).unless({ path: [/^\/api-docs(\/.*)?$/, "/user/login", "/user/signup", "/status"] }));
 
 
 app.use(bodyParser.json());
@@ -60,7 +60,7 @@ app.get("/status", (req, res) => {
   res.json({ message: "Back-end is running..." });
 });
 
-app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 /* app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   if (error.name === "UnauthorizedError") {
