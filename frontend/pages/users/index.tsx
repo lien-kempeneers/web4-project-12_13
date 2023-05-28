@@ -12,7 +12,6 @@ import "../../node_modules/bootstrap/scss/bootstrap.scss";
 const Users : React.FC = () => {
 
     const [users, setUsers] = useState<Array<User>>([])
-    console.log(users)
 
     const getUsers = async () => {
         UserService.getAllUsers()
@@ -30,10 +29,8 @@ const Users : React.FC = () => {
             <Head>
                 <title>Users</title>
             </Head>
-            <main > 
                 <Header></Header>
                 <UserOverviewTable users={users}/>
-            </main>
         </>
     )
 }
