@@ -22,6 +22,20 @@ const getUser = (id:number) => {
     })
 }
 
+const getUserByEmail = (email:String) => {
+    const token = sessionStorage.getItem("token")
+    return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/byemail/{email}', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                email: email
+            })
+    })
+}
+
 const createUser = (name:string, email:string, password: string) => {
     const token = sessionStorage.getItem("token")
     return fetch(process.env.NEXT_PUBLIC_API_URL+'/user/signup', {
@@ -74,6 +88,7 @@ const deleteUser = (id: number) => {
 const UserService = {
     getAllUsers,
     getUser,
+    getUserByEmail,
     createUser,
     updateUser,
     deleteUser

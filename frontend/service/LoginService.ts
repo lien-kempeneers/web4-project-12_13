@@ -8,15 +8,14 @@ const logIn = (email: string, password: string) => {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({"email":email, "password":password})
-    }).then((response)=>{
+    }).then(async(response)=>{
         if (!response.ok) {
-            throw Error(response.statusText);
+            return Error(response.statusText);
         }
-        return response.json()
-    }).then((data) =>{
-        console.log(data)
-        sessionStorage.setItem('token', data.data.token);
-        sessionStorage.setItem("username",data.data.username)
+        const json = await response.json()
+        console.log(json)
+        sessionStorage.setItem('token', json.data.token);
+        sessionStorage.setItem("username",json.data.username)
     })
 }
 

@@ -12,6 +12,7 @@ import LoginService from "../../service/LoginService"
 const AddUserForm : React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
     const { push } = useRouter();
 
 
@@ -20,10 +21,19 @@ const AddUserForm : React.FC = () => {
     function handleSubmit(event: FormEvent<HTMLFormElement>): void {
         event.preventDefault();
         console.log(email, password);
-        LoginService.logIn(email, password).then(
-            (result)=>{
-        push("/users")}
-        )
+      
+            LoginService.logIn(email, password).then(
+                (result)=>{
+                    if(result){ 
+                        setError("Gegevens incorrect, probeer opnieuw!")
+                    }
+                    else{
+                        push("/users")
+                    }})
+
+        
+        
+    
 
     }
 
@@ -31,6 +41,7 @@ const AddUserForm : React.FC = () => {
     return (
         <>
         <form onSubmit={handleSubmit}>
+            <div className="errorField">{error}</div>
             <div className="">
                 <label htmlFor="name">Email:</label>
             </div>
@@ -44,6 +55,7 @@ const AddUserForm : React.FC = () => {
             <div className="">
                 <label htmlFor="name">Password:</label>
             </div>
+            <div>
             <input
                 id="password"
                 type="password"
@@ -51,6 +63,7 @@ const AddUserForm : React.FC = () => {
                 required
                 onChange={(event) => setPassword(event.target.value)}
                 />
+            </div>
             <div className="">
                 <button type="submit">Submit</button>
             </div>
