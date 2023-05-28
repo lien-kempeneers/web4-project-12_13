@@ -24,6 +24,8 @@
 *    get:
 *      description: List all milestones that are in the database
 *      summary: List all milestones
+*      tags:
+*       - milestones
 *      security:
 *        - bearerAuth: []
 *      responses:
@@ -32,6 +34,8 @@
 *    post:
 *      description: Add a milestone to the database 
 *      summary: Create a milestone
+*      tags:
+*       - milestones
 *      requestBody:
 *        required: true
 *        summary: Add a milestone
@@ -46,6 +50,8 @@
 *    get:
 *      description: Get a specific milestone from the database
 *      summary: Get a milestone
+*      tags:
+*       - milestones
 *      responses:
 *        200:
 *          description: Succesfully retrieved a milestone
@@ -63,6 +69,8 @@
 *    put:
 *      description: Update a milestone that's in the database
 *      summary: Update a milestone
+*      tags:
+*       - milestones
 *      requestBody:
 *        content:
 *          application/json:
@@ -81,6 +89,8 @@
 *    delete:
 *      summary: Delete a milestone
 *      description: Delete a specific milestone from the database
+*      tags:
+*       - milestones
 *      parameters:
 *        - name: id
 *          in: path

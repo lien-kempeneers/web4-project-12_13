@@ -17,12 +17,16 @@
 *    get:
 *      description: List all profiles that are in the database
 *      summary: List all profiles
+*      tags:
+*       - profiles
 *      responses:
 *        200:
 *          description: Succesfully received a list of all the profiles
 *    post:
 *      description: Add a profile to the database 
 *      summary: Create a profile
+*      tags:
+*       - profiles
 *      requestBody:
 *        required: true
 *        summary: Add a profile
@@ -37,6 +41,8 @@
 *    get:
 *      description: Get a specific profile from the database
 *      summary: Get a profile
+*      tags:
+*       - profiles
 *      responses:
 *        200:
 *          description: Succesfully retrieved a profile
@@ -54,6 +60,8 @@
 *    put:
 *      description: Update a profile that's in the database
 *      summary: Update a profile
+*      tags:
+*       - profiles
 *      requestBody:
 *        content:
 *          application/json:
@@ -72,6 +80,8 @@
 *    delete:
 *      summary: Delete a profile
 *      description: Delete a specific profile from the database
+*      tags:
+*       - profiles
 *      parameters:
 *        - name: id
 *          in: path

@@ -24,12 +24,16 @@
 *    get:
 *      description: List all tasks that are in the database
 *      summary: List all tasks
+*      tags:
+*       - tasks
 *      responses:
 *        200:
 *          description: Succesfully received a list of all the tasks
 *    post:
 *      description: Add a task to the database 
 *      summary: Create a task
+*      tags:
+*       - tasks
 *      requestBody:
 *        required: true
 *        summary: Add a task
@@ -44,6 +48,8 @@
 *    get:
 *      description: Get a specific task from the database
 *      summary: Get a task
+*      tags:
+*       - tasks
 *      responses:
 *        200:
 *          description: Succesfully retrieved a task
@@ -61,6 +67,8 @@
 *    put:
 *      description: Update a task that's in the database
 *      summary: Update a task
+*      tags:
+*       - tasks
 *      requestBody:
 *        content:
 *          application/json:
@@ -78,6 +86,8 @@
 *          description: Succesfully updated a task
 *    delete:
 *      summary: Delete a task
+*      tags:
+*       - tasks
 *      description: Delete a specific task from the database
 *      parameters:
 *        - name: id

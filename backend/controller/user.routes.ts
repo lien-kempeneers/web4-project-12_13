@@ -20,6 +20,8 @@
 *    get:
 *      description: List all users that are in the database
 *      summary: List all users
+*      tags:
+*       - users
 *      security:
 *        - bearerAuth: []
 *      responses:
@@ -28,6 +30,8 @@
 *    post:
 *      description: Add a user to the database 
 *      summary: Create a user
+*      tags:
+*       - users
 *      requestBody:
 *        required: true
 *        summary: Add a user
@@ -42,6 +46,8 @@
 *    get:
 *      description: Get a specific user from the database
 *      summary: Get a user
+*      tags:
+*       - users
 *      responses:
 *        200:
 *          description: Succesfully retrieved a user
@@ -59,6 +65,8 @@
 *    put:
 *      description: Update a user that's in the database
 *      summary: Update a user
+*      tags:
+*       - users
 *      requestBody:
 *        content:
 *          application/json:
@@ -77,6 +85,8 @@
 *    delete:
 *      summary: Delete a user
 *      description: Delete a specific user from the database
+*      tags:
+*       - users
 *      parameters:
 *        - name: id
 *          in: path
@@ -91,6 +101,8 @@
 *    get:
 *      description: Get a specific user from the database with unique email address
 *      summary: Get a user
+*      tags:
+*       - users
 *      responses:
 *        200:
 *          description: Succesfully retrieved a user
@@ -108,6 +120,8 @@
 *    post:
 *      description: Log in a user
 *      summary: Log in a user
+*      tags:
+*       - users
 *      requestBody:
 *       required: true
 *       content:
@@ -151,7 +165,7 @@ userRouter.get('/:id', async (req: Request, res: Response) => {
 
 userRouter.get('/byemail/:email', async (req: Request, res: Response) => {
     try{
-        console.log(req.params.email);
+
         const user = await userService.getUserByEmail(req.params.email);
         res.status(200).json(user);
     } catch (err) {
@@ -180,7 +194,7 @@ userRouter.put('/:id', async  (req: Request, res: Response) => {
 });
 
 userRouter.delete('/:id', async  (req: Request, res: Response) => {
-    console.log(req.params.id);
+
     try{
         const user = await userService.deleteUser(parseInt(req.params.id));
         res.status(200).json(user);
