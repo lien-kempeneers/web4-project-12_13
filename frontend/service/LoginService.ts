@@ -14,8 +14,9 @@ const logIn = (email: string, password: string) => {
         }
         return response.json()
     }).then((data) =>{
-        sessionStorage.setItem('token', data.token.token);
-        sessionStorage.setItem("username",data.token.username)
+        console.log(data)
+        sessionStorage.setItem('token', data.data.token);
+        sessionStorage.setItem("username",data.data.username)
     })
 }
 
