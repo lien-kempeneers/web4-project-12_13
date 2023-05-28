@@ -21,8 +21,6 @@ const AddUserForm : React.FC = () => {
         event.preventDefault();
         console.log(username, password);
         LoginService.logIn(username, password);
-        //TODO handle login + store in session storage
-        //throw new Error("Function not implemented.");
     }
 
 
