@@ -13,6 +13,7 @@ const AddUserForm : React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isEnable, setEnable] = useState(true);
+    const { push } = useRouter();
 
 
 
@@ -20,7 +21,12 @@ const AddUserForm : React.FC = () => {
     function handleSubmit(event: FormEvent<HTMLFormElement>): void {
         event.preventDefault();
         console.log(email, password);
-        LoginService.logIn(email, password);
+        LoginService.logIn(email, password).then(
+            (result)=>{
+            push("/users")
+        }
+        )
+
     }
 
 
