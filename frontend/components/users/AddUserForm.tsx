@@ -37,6 +37,7 @@ const AddUserForm : React.FC = () => {
                 id="name"
                 type="text"
                 placeholder={"username"}
+                required
                 onChange={(event) => setName(event.target.value)}
             />
             <div className="">
@@ -44,8 +45,9 @@ const AddUserForm : React.FC = () => {
             </div>
             <input
                 id="email"
-                type="text"
+                type="email"
                 placeholder={"email"}
+                required
                 onChange={(event) => setEmail(event.target.value)}
             />
             <div className="">
@@ -55,6 +57,7 @@ const AddUserForm : React.FC = () => {
                 id="password"
                 type="password"
                 placeholder={"password"}
+                required
                 onChange={(event) => setPassword(event.target.value)}
                 />
             <div className="">

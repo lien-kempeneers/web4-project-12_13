@@ -12,7 +12,6 @@ import LoginService from "../../service/LoginService"
 const AddUserForm : React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isEnable, setEnable] = useState(true);
     const { push } = useRouter();
 
 
@@ -37,8 +36,9 @@ const AddUserForm : React.FC = () => {
             </div>
             <input
                 id="username"
-                type="text"
+                type="email"
                 placeholder={"email"}
+                required
                 onChange={(event) => setEmail(event.target.value)}
             />
             <div className="">
@@ -48,6 +48,7 @@ const AddUserForm : React.FC = () => {
                 id="password"
                 type="password"
                 placeholder={"password"}
+                required
                 onChange={(event) => setPassword(event.target.value)}
                 />
             <div className="">

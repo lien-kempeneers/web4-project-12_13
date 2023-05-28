@@ -201,8 +201,8 @@ userRouter.post('/signup', async  (req: Request, res: Response) => {
 userRouter.post('/login', async  (req: Request, res: Response) => {
     try{
         const userInput: User = req.body;
-        const token = await userService.authenticate(userInput);
-        res.status(200).json({message: 'authentication successful', token});
+        const data = await userService.authenticate(userInput);
+        res.status(200).json({message: 'authentication successful', data,});
     } catch (error) {
         res.status(401).json({status: 'unauthorized', message: error.message});
     }
