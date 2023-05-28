@@ -10,11 +10,11 @@ const EditUserForm : React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [id, setId] = useState(0);
     const { push } = useRouter();
 
     const router = useRouter();
     console.log(router.query);
-    const id = parseInt(router.query.id as string);
 
     const getUser = async () => {
         UserService.getUser(id)
@@ -24,6 +24,7 @@ const EditUserForm : React.FC = () => {
 
     useEffect(() => {
         if(!!sessionStorage.getItem("token")){
+            setId(parseInt(router.query.id as string))
             getUser();
         }else{
             push('/login');
