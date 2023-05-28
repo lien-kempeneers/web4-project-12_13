@@ -11,7 +11,7 @@ useEffect(() => {
         <>
 <header>
     <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">Task App</a>{isLogged?
                       
