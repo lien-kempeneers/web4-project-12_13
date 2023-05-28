@@ -49,10 +49,8 @@ const createUser = (name:string, email:string, password: string) => {
                 password: password,
                 email: email
             })
-        }).then((response)=>{if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        return response.json()})
+        }).then((response)=>{return response
+        })
 }
 
 const updateUser = (id: number, username:string, password:string, email:string) => {

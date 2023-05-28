@@ -2,17 +2,14 @@ import React, { FormEvent } from "react";
 import UserService from "@/service/UserService";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react"
-import LoginService from "@/service/LoginService";
-import { User } from "@/types";
 
 
 
 const EditUserForm : React.FC = () => {
-    const [user, setUser] = useState<User>()
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isEnable, setEnable] = useState(true);
+    const [error, setError] = useState("");
     const { push } = useRouter();
 
     const router = useRouter();
@@ -38,13 +35,19 @@ const EditUserForm : React.FC = () => {
         event.preventDefault();
         console.log(email, password);
         UserService.updateUser(id, name, password, email)
-        .then((result)=>{push("/users")})
+        .then((result)=>
+        {if(!result.ok){
+            setError("Niet alle velden zijn correct ingevuld, probeer opnieuw.")
+        }
+        else{
+        push("/users")}})
     }
 
 
     return (
         <>
         <form onSubmit={handleSubmit}>
+        <div className="errorField">{error}</div>
             <div className="">
                 <label htmlFor="name">Username:</label>
             </div>
@@ -52,6 +55,7 @@ const EditUserForm : React.FC = () => {
                 id="name"
                 type="text"
                 value={name || ""}
+                required
                 onChange={(event) => setName(event.target.value)}
             />
             <div className="">
@@ -59,8 +63,9 @@ const EditUserForm : React.FC = () => {
             </div>
             <input
                 id="email"
-                type="text"
+                type="email"
                 value={email || ""}
+                required
                 onChange={(event) => setEmail(event.target.value)}
             />
             <div className="">
@@ -69,6 +74,7 @@ const EditUserForm : React.FC = () => {
             <input
                 id="password"
                 type="password"
+                required
                 onChange={(event) => setPassword(event.target.value)}
                 />
             <div className="">

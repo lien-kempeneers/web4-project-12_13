@@ -191,11 +191,10 @@ userRouter.delete('/:id', async  (req: Request, res: Response) => {
 
 userRouter.post('/signup', async  (req: Request, res: Response) => {
     const userInput = <User>req.body;
-    if(!userInput.username || !userInput.password) {
-        throw new Error('username and password are required fields');
-    }
+    try{
     const user = await userService.createUser(userInput);
     res.status(200).json(user);
+}catch(err){res.status(500).json({status: 'error', message: err.message});}
 });
 
 userRouter.post('/login', async  (req: Request, res: Response) => {

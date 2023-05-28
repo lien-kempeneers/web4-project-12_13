@@ -11,6 +11,7 @@ const Milestones : React.FC = () => {
     const [isLogged, setIsLogged] = useState(false);
 useEffect(() => {
     setIsLogged(!!sessionStorage.getItem("token"));
+    
 }, []);
 
     
@@ -21,7 +22,7 @@ useEffect(() => {
             </Head>
             <Header></Header>
             <main> 
-                {isLogged ? <div><p>"You are already logged in" </p></div>: <LoginForm></LoginForm>}
+                {isLogged ? <div><p>You are already logged in!</p></div>: <LoginForm></LoginForm>}
             </main>
         </>
     )

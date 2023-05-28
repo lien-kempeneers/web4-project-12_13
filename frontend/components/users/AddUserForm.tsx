@@ -13,23 +13,26 @@ const AddUserForm : React.FC = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isEnable, setEnable] = useState(true);
+    const [error, setError] = useState("");
     const { push } = useRouter();
 
     function handleSubmit(event: FormEvent<HTMLFormElement>): void {
         event.preventDefault();
         console.log(email, password);
         UserService.createUser(name, email, password).then((result)=>{
+            if(!result.ok){
+                setError("Niet alle velden zijn correct ingevuld, probeer opnieuw")
+            }else{
             LoginService.logIn(email, password).then(
-                (result)=>{
-            push("/users")})
-        }
+                (result)=>{push("/users")})
+        }}
         )
     }
 
     return (
         <>
         <form onSubmit={handleSubmit}>
+        <div className="errorField">{error}</div>
             <div className="">
                 <label htmlFor="name">Username:</label>
             </div>
